@@ -1,0 +1,15 @@
+.login-grid {
+    height: 100%;
+}
+
+.voiq-logo {
+    width: 80%;
+}
+
+.voiq-login-segment {
+    padding: 2.5em !important;
+}
+
+.voiq-sign-in-button {
+    background: orange !important;
+}
