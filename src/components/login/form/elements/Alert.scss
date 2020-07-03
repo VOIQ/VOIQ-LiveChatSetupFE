@@ -1,0 +1,17 @@
+.voiq-field {
+  &__title {
+    text-align: left;
+  }
+
+  .invalid-feedback {
+    display: block;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    visibility: hidden;
+  }
+
+  .form-control.is-invalid ~ .invalid-feedback {
+    opacity: 1;
+    visibility: visible;
+  }
+}

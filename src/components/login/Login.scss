@@ -1,0 +1,68 @@
+@import '../../styles/colors';
+
+.login-container {
+  margin-top: 5rem;
+  height: 100%;
+}
+
+.forgot-password a,
+.register a,
+.apply-here a {
+  color: $voiq-blue;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: $voiq-success-hover;
+}
+
+.login-logo {
+  height: 70px;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  border: 0;
+  outline: 0;
+  padding-left: 0;
+  background: transparent;
+  color: $voiq-dark-gray;
+  border-bottom: 2px solid $voiq-light-gray;
+  box-shadow: none;
+}
+
+.login-navbar {
+  margin-top: 8px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.referred label {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+
+.agents-statement,
+.agents-statement hr {
+  color: $voiq-form-label-color;
+}
+
+.voiq-field {
+  &__title {
+    font-size: 16px;
+  }
+
+  .form-control {
+    font-size: 14px;
+    font-weight: lighter;
+  }
+
+  .tou {
+    font-weight: lighter;
+    font-size: 0.75rem;
+  }
+}
+
+.mt-7 {
+  margin-top: 5rem !important;
+}

@@ -1,0 +1,54 @@
+.btn-100-width {
+  width: 100%;
+}
+
+.btn-voiq-success {
+  color: white;
+  background-color: #39b2b1;
+  border-color: #39b2b1;
+}
+
+.btn-voiq-success:focus,
+.btn-voiq-success:active,
+.btn-voiq-success.active,
+.open .dropdown-toggle.btn-voiq-success {
+  color: white;
+  background-color: #39b2b1;
+  border-color: #39b2b1;
+}
+
+.btn-voiq-success:hover {
+  color: white;
+  background-color: #46d5d4;
+  border-color: #46d5d4;
+}
+
+.btn-voiq-success:active,
+.btn-voiq-success.active,
+.open .dropdown-toggle.btn-voiq-success {
+  background-image: none;
+}
+
+.btn-voiq-success.disabled,
+.btn-voiq-success[disabled],
+fieldset[disabled] .btn-voiq-success,
+.btn-voiq-success.disabled:hover,
+.btn-voiq-success[disabled]:hover,
+fieldset[disabled] .btn-voiq-success:hover,
+.btn-voiq-success.disabled:focus,
+.btn-voiq-success[disabled]:focus,
+fieldset[disabled] .btn-voiq-success:focus,
+.btn-voiq-success.disabled:active,
+.btn-voiq-success[disabled]:active,
+fieldset[disabled] .btn-voiq-success:active,
+.btn-voiq-success.disabled.active,
+.btn-voiq-success[disabled].active,
+fieldset[disabled] .btn-voiq-success.active {
+  background-color: #39b2b1;
+  border-color: #39b2b1;
+}
+
+.btn-voiq-success .badge {
+  color: #39b2b1;
+  background-color: #ffffff;
+}
