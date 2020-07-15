@@ -1,41 +1,58 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 
-import Login from "./login/Login";
-import Voicebots from "./voicebots/Voicebots";
-import LoginService from "../services/LoginService";
+import App from "./App";
 import AuthenticationHelper from "../helpers/AuthenticationHelper";
+import Login from "./Login/Login";
+import LoginService from "../services/LoginService";
+import CreateVoicebot from "./Voicebots/CreateVoicebot/CreateVoicebot";
+import Voicebots from "./Voicebots/Voicebots";
+import {CircularProgress, Grid} from "@material-ui/core";
+import EditVoicebot from "./Voicebots/EditVoicebot/EditVoicebot";
 
-const PrivateRoute = ({children, ...opts}) => {
+const PrivateRoute = ({children, ...props}) => {
   const history = useHistory();
-  try {
-    let token = localStorage.getItem("voiqToken");
-    LoginService.authenticatedPing(
-      token,
-      (response) => {
-        console.log("CALLBACK");
-        console.log(response);
-        // TODO: We need to standardize the responses and create/use error codes or HTTP error codes.
-        if (response.error) {
-          AuthenticationHelper.logout(history);
+
+  useEffect(() => {
+    try {
+      LoginService.authenticatedPing(
+        (response) => {
+          // TODO: We need to standardize the responses and create/use error codes or HTTP error codes.
+          if (response.error) {
+            AuthenticationHelper.logout(history);
+          } else {
+            let roles = response.roles;
+            props.setUserRole(AuthenticationHelper.highestHierarchyRole(roles));
+          }
         }
-      }
-    );
-  } catch (e) {
-    AuthenticationHelper.logout(history);
-  }
+      );
+    } catch (e) {
+      AuthenticationHelper.logout(history);
+    }
+  }, [history, props]);
 
   return (
     <Route
-      {...opts}
+      {...props}
       render={() => {
-        return children;
+        if (props.userRole) {
+          return children;
+        } else {
+          return (
+            <Grid container spacing={3} direction="row" alignItems="center" justify="center" className="voicebots-container">
+              <CircularProgress className="voicebot-progress" />
+            </Grid>
+          );
+        }
       }}
     />
   );
 }
 
 const Container = () => {
+  const [userRole, setUserRole] = React.useState(null);
+
+  // TODO: Active item string is one of the values of userRolePermissions.json, maybe add a constants file?
   return (
     <Switch>
       <Route exact path="/">
@@ -44,8 +61,20 @@ const Container = () => {
       <Route path="/login">
         <Login />
       </Route>
-      <PrivateRoute path="/voicebots">
-        <Voicebots />
+      <PrivateRoute exact userRole={userRole} setUserRole={setUserRole} path="/voicebots">
+        <App userRole={userRole} activeItem="voicebots">
+          <Voicebots/>
+        </App>
+      </PrivateRoute>
+      <PrivateRoute exact userRole={userRole} setUserRole={setUserRole} path="/voicebots/create">
+        <App userRole={userRole}>
+          <CreateVoicebot />
+        </App>
+      </PrivateRoute>
+      <PrivateRoute exact userRole={userRole} setUserRole={setUserRole} path="/voicebots/edit/:id">
+        <App userRole={userRole}>
+          <EditVoicebot />
+        </App>
       </PrivateRoute>
       <Route path="*">
         <p>404</p>

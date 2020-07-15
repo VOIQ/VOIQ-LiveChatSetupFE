@@ -1,0 +1,22 @@
+@import '../../styles/colors';
+
+.login-container {
+  margin-top: 7rem !important;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.forgot-password a,
+.register a,
+.apply-here a {
+  color: $voiq-blue;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: $voiq-success-hover;
+}
+
+.login-logo {
+  width: 270px;
+}

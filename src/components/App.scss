@@ -1,0 +1,17 @@
+@import '../styles/buttons.scss';
+
+.voiq-app-container {
+  height: 100vh;
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+.voiq-app-body {
+  margin-left: 180px;
+  height: 100%;
+  width: 100%;
+}
+
+.voiq-progress {
+  color: $voiq-blue !important;
+}

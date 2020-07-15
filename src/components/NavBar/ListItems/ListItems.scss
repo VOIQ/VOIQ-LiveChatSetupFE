@@ -1,0 +1,34 @@
+.list-item{
+  height: 50px !important;
+  overflow-x: visible;
+}
+
+.item-text-open {
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.5s ease-in-out;
+}
+
+.item-text-closed {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: all 0.5s ease-in-out;
+}
+
+.list-item-closed {
+  padding-left: 40px !important;
+  transition: padding-left 1s cubic-bezier(0.4, 0, 0.2, 1) 0ms !important;
+}
+
+.list-item-open {
+  transition: all 1s ease-in-out !important;
+}
+
+.list-item-icon-closed {
+  text-align: center !important;
+  transition: all 1s ease-in-out !important;
+}
+
+.list-item-icon-open {
+  transition: all 1s ease-in-out !important;
+}

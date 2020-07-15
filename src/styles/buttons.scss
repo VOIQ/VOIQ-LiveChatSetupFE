@@ -1,54 +1,107 @@
-.btn-100-width {
-  width: 100%;
+@import './colors';
+
+.voiq-button-primary {
+  &.MuiButton-root {
+    color: white !important;
+    background-color: $voiq-blue !important;
+    border-color: $voiq-blue !important;
+  }
+
+  &.MuiButton-root:focus,
+  &.MuiButton-root:active,
+  &.MuiButton-root.active,
+  &.open .dropdown-toggle.MuiButton-root {
+    color: white;
+    background-color: $voiq-blue !important;
+    border-color: $voiq-blue !important;
+  }
+
+  &.MuiButton-root:hover {
+    color: white;
+    background-color: $voiq-success-hover !important;
+    border-color: $voiq-success-hover !important;
+  }
+
+  &.MuiButton-root:active,
+  &.MuiButton-root.active,
+  &.open .dropdown-toggle.MuiButton-root {
+    background-image: none;
+  }
+
+  &.MuiButton-root.disabled,
+  &.MuiButton-root[disabled],
+  fieldset[disabled] &.MuiButton-root,
+  &.MuiButton-root.disabled:hover,
+  &.MuiButton-root[disabled]:hover,
+  fieldset[disabled] &.MuiButton-root:hover,
+  &.MuiButton-root.disabled:focus,
+  &.MuiButton-root[disabled]:focus,
+  fieldset[disabled] &.MuiButton-root:focus,
+  &.MuiButton-root.disabled:active,
+  &.MuiButton-root[disabled]:active,
+  fieldset[disabled] &.MuiButton-root:active,
+  &.MuiButton-root.disabled.active,
+  &.MuiButton-root[disabled].active,
+  fieldset[disabled] &.MuiButton-root.active {
+    background-color: $voiq-blue !important;
+    border-color: $voiq-blue !important;
+  }
+
+  &.MuiButton-root .badge {
+    color: $voiq-blue !important;
+    background-color: #ffffff !important;
+  }
 }
 
-.btn-voiq-success {
-  color: white;
-  background-color: #39b2b1;
-  border-color: #39b2b1;
-}
+.voiq-button-secondary {
+  &.MuiButton-root {
+    color: white !important;
+    background-color: $voiq-orange-light !important;
+    border-color: $voiq-orange-light !important;
+  }
 
-.btn-voiq-success:focus,
-.btn-voiq-success:active,
-.btn-voiq-success.active,
-.open .dropdown-toggle.btn-voiq-success {
-  color: white;
-  background-color: #39b2b1;
-  border-color: #39b2b1;
-}
+  &.MuiButton-root:focus,
+  &.MuiButton-root:active,
+  &.MuiButton-root.active,
+  &.open .dropdown-toggle.MuiButton-root {
+    color: white;
+    background-color: $voiq-orange-light !important;
+    border-color: $voiq-orange-light !important;
+  }
 
-.btn-voiq-success:hover {
-  color: white;
-  background-color: #46d5d4;
-  border-color: #46d5d4;
-}
+  &.MuiButton-root:hover {
+    color: white;
+    background-color: $voiq-orange !important;
+    border-color: $voiq-orange !important;
+  }
 
-.btn-voiq-success:active,
-.btn-voiq-success.active,
-.open .dropdown-toggle.btn-voiq-success {
-  background-image: none;
-}
+  &.MuiButton-root:active,
+  &.MuiButton-root.active,
+  &.open .dropdown-toggle.MuiButton-root {
+    background-image: none;
+  }
 
-.btn-voiq-success.disabled,
-.btn-voiq-success[disabled],
-fieldset[disabled] .btn-voiq-success,
-.btn-voiq-success.disabled:hover,
-.btn-voiq-success[disabled]:hover,
-fieldset[disabled] .btn-voiq-success:hover,
-.btn-voiq-success.disabled:focus,
-.btn-voiq-success[disabled]:focus,
-fieldset[disabled] .btn-voiq-success:focus,
-.btn-voiq-success.disabled:active,
-.btn-voiq-success[disabled]:active,
-fieldset[disabled] .btn-voiq-success:active,
-.btn-voiq-success.disabled.active,
-.btn-voiq-success[disabled].active,
-fieldset[disabled] .btn-voiq-success.active {
-  background-color: #39b2b1;
-  border-color: #39b2b1;
-}
+  &.MuiButton-root.disabled,
+  &.MuiButton-root[disabled],
+  fieldset[disabled] &.MuiButton-root,
+  &.MuiButton-root.disabled:hover,
+  &.MuiButton-root[disabled]:hover,
+  fieldset[disabled] &.MuiButton-root:hover,
+  &.MuiButton-root.disabled:focus,
+  &.MuiButton-root[disabled]:focus,
+  fieldset[disabled] &.MuiButton-root:focus,
+  &.MuiButton-root.disabled:active,
+  &.MuiButton-root[disabled]:active,
+  fieldset[disabled] &.MuiButton-root:active,
+  &.MuiButton-root.disabled.active,
+  &.MuiButton-root[disabled].active,
+  fieldset[disabled] &.MuiButton-root.active {
+    background-color: $voiq-orange-light !important;
+    border-color: $voiq-orange-light !important;
+  }
 
-.btn-voiq-success .badge {
-  color: #39b2b1;
-  background-color: #ffffff;
+  &.MuiButton-root .badge {
+    color: $voiq-orange-light !important;
+    background-color: #ffffff !important;
+  }
 }

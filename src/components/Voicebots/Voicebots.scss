@@ -1,0 +1,28 @@
+@import '../../styles/buttons.scss';
+
+.voicebots-container {
+  height: 100%;
+  padding-top: 50px;
+}
+
+.voicebots-first-item {
+  margin-top: 200px !important;
+  text-align: center;
+}
+
+.welcome-title {
+  font-size: 20px;
+  color: $voiq-black;
+}
+
+.voicebot-progress {
+  color: $voiq-blue !important;
+}
+
+.voicebots-list-container {
+
+}
+
+.voicebots-list-title {
+  font-size: 48px;
+}

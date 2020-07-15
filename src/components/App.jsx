@@ -1,0 +1,19 @@
+import React from 'react';
+
+import NavBar from "./NavBar/NavBar";
+import {Container} from "@material-ui/core";
+
+import './App.scss';
+
+const App = (props) => {
+  return (
+    <Container className="voiq-app-container">
+      <NavBar userRole={props.userRole} activeItem={props.activeItem} />
+      <div className="voiq-app-body">
+        { props.children }
+      </div>
+    </Container>
+  );
+}
+
+export default App;

@@ -1,0 +1,46 @@
+@import '../../../styles/colors';
+
+.login-form{
+  margin-top: 5rem !important;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+  border: 0;
+  outline: 0;
+  padding-left: 0;
+  background: transparent;
+  color: $voiq-dark-gray;
+  border-bottom: 2px solid $voiq-light-gray;
+  box-shadow: none;
+  width: 270px;
+}
+
+.voiq-login-password-field {
+  margin-top: 3em;
+}
+
+.voiq-field {
+  label.Mui-focused {
+    color: black;
+  }
+
+  .MuiInput-underline:after {
+    border-bottom-color: black;
+  }
+}
+
+.tou {
+  font-weight: lighter;
+  font-size: 0.75rem;
+  margin-top: 4em;
+}
+
+.voiq-button-primary {
+  width: 270px;
+  margin-top: 0.5em !important;
+}
+
+.invalid-feedback {
+  width: 270px;
+}

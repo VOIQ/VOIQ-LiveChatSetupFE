@@ -1,0 +1,27 @@
+@import '../../../styles/buttons';
+
+.create-voicebot-form{
+  max-width: 100% !important;
+  text-align: center;
+
+  form {
+    width: 80%;
+
+    .voiq-field {
+      width: 100%;
+
+      .MuiTextField-root {
+        width: 100%;
+      }
+    }
+
+    button {
+      margin-top: 20px;
+    }
+  }
+}
+
+.create-voicebot-title {
+  max-width: 100% !important;
+  font-size: 48px;
+}

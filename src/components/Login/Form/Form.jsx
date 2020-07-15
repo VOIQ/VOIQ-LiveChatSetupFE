@@ -1,45 +1,48 @@
-import DOMPurify from 'dompurify';
 import React from 'react';
+
+import DOMPurify from 'dompurify';
+import { Box, Button, Grid, TextField } from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 import { useForm } from 'react-hook-form';
 import { useHistory } from "react-router-dom";
 import * as Yup from 'yup';
-
-import Alert from './elements/Alert'
-import LoginService from "../../../services/LoginService";
 import { yupResolver } from '@hookform/resolvers';
 
+import LoginService from "../../../services/LoginService";
+import Helpers from "../../../helpers/Utils";
+
 import './Form.scss';
+import '../../../styles/buttons.scss';
 
 const LoginSchema = Yup.object().shape({
   password: Yup.string().required('The Password is required'),
   email: Yup.string()
     .email('The Email must be a valid email address.')
     .required('The Email is required')
-})
+});
 
 const Form = () => {
-  const [formErrors, setFormErrors] = React.useState([]);
+  const [backendErrors, setBackendErrors] = React.useState([]);
   const history = useHistory();
 
-  const { register, handleSubmit, errors, formState } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: yupResolver(LoginSchema),
   });
 
   const onSubmit = (values) => {
     try {
-      console.log("SUBMITTING");
-      console.log(values);
+      setBackendErrors([]);
       LoginService.authenticate(
         values.email,
         values.password,
         (response) => {
           if (response.error) {
             console.log(response.error);
-            setFormErrors([ response.error ])
+            setBackendErrors([ response.error ]);
           } else {
-            console.log(response);
-            history.push("/voicebots");
+            // TODO: Check valid response
             localStorage.setItem('voiqToken', response.auth_token);
+            history.push("/voicebots");
           }
         }
       );
@@ -50,44 +53,44 @@ const Form = () => {
 
   const renderEmailField = () => {
     return (
-      <div className="voiq-field">
-        <h3 className="voiq-field__title">Email</h3>
-        <input
-          className={`form-control voiq-field__Input ${errors.email ? 'is-invalid' : ''}`}
+      <Box className="voiq-field" textAlign="center">
+        <TextField
+          error={!Helpers.emptyObject(errors.email)}
+          helperText={errors.email && errors.email.message ? errors.email.message : ''}
+          id="email"
           name="email"
+          label="Email"
           type="text"
           placeholder="Enter your email"
-          title="Email"
           autoFocus={true}
-          ref={register}
+          inputRef={register}
         />
-        <div className="invalid-feedback">{errors.email && errors.email.message ? errors.email.message : ''}</div>
-      </div>
+      </Box>
     );
   }
 
   const renderPasswordField = () => {
     return (
-      <div className="voiq-field mt-5">
-        <h3 className="voiq-field__title">Password</h3>
-        <input
-          className={`form-control voiq-field__Input ${errors.password ? 'is-invalid' : ''}`}
+      <Box className="voiq-field voiq-login-password-field" textAlign="center">
+        <TextField
+          error={!Helpers.emptyObject(errors.password)}
+          helperText={errors.password && errors.password.message ? errors.password.message : ''}
+          id="password"
           name="password"
-          type="password"
+          label="Password"
           placeholder="Enter your password"
-          title="Password"
+          type="password"
           autoComplete="off"
-          ref={register}
+          inputRef={register}
         />
-        <div className="invalid-feedback">{errors.password && errors.password.message ? errors.password.message : ''}</div>
-      </div>
+      </Box>
     );
   }
 
   const renderTou = () => {
     return (
       <div
-        className="col-12 text-center tou"
+        className="tou"
         dangerouslySetInnerHTML={{
           __html: DOMPurify.sanitize(
             'By logging in to the VOIQ App, you are accepting the <a href="https://www.voiq.com/tou" target="_blank" rel="noopener noreferrer">Terms of Use</a> of VOIQ Inc.'
@@ -98,25 +101,21 @@ const Form = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="row login-form mt-7">
-        <div className="col-lg-3 col-md-4 col-sm-8 col-12 mx-auto">
-          <Alert errors={formErrors}/>
+    <Grid item>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="login-form">
+          { !Helpers.emptyArray(backendErrors) && (<Alert severity="error">{backendErrors}</Alert>)}
           { renderEmailField() }
           { renderPasswordField() }
         </div>
-      </div>
-      <div className="row mt-5">
         { renderTou() }
-      </div>
-      <div className="row mt-2">
-        <div className="col-lg-3 col-md-4 col-sm-8 col-12 mx-auto">
-          <button type="submit" disabled={formState.isSubmitting} className="btn btn-voiq-success btn-100-width">
+        <Box textAlign="center">
+          <Button type="submit" color="primary" className="voiq-button-primary">
             Login
-          </button>
-        </div>
-      </div>
-    </form>
+          </Button>
+        </Box>
+      </form>
+    </Grid>
   );
 }
 
