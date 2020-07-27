@@ -1,17 +1,29 @@
 @import '../styles/buttons.scss';
+@import '../styles/layout.scss';
 
 .voiq-app-container {
   height: 100vh;
   margin-left: 0 !important;
+  margin-right: 0 !important;
   padding-left: 0 !important;
 }
 
 .voiq-app-body {
-  margin-left: 180px;
+  margin-left: $body-navbar-margin;
   height: 100%;
-  width: 100%;
+  width: calc(100% - $navbar-size-open);
 }
 
 .voiq-progress {
   color: $voiq-blue !important;
+}
+
+.voiq-title {
+  font-size: 48px !important;
+  padding-top: 15px !important;
+  max-width: 100% !important;
+
+  input {
+    font-size: 30px !important;
+  }
 }

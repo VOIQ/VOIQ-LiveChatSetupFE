@@ -19,7 +19,7 @@ const CreateVoicebot = () => {
   const onSubmit = (values) => {
     try {
       VoicebotsService.create(
-        values,
+        values['voicebot_name'],
         history,
         (response) => {
           console.log(response);
@@ -34,7 +34,7 @@ const CreateVoicebot = () => {
   }
   return (
     <Grid container spacing={1} direction="column" className="voicebots-container">
-      <Grid item xs={1} className="create-voicebot-title">
+      <Grid item xs={1} className="voiq-title">
         Create Voicebot
       </Grid>
       <Grid item xs={11} className="create-voicebot-form">

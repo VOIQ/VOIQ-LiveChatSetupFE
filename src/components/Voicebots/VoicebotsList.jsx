@@ -23,8 +23,8 @@ const VoicebotList = (props) => {
   }
 
   return (
-    <Grid container spacing={1} direction="column" className="voicebots-container">
-      <Grid item xs={1} className="voicebots-list-title">
+    <Grid container direction="column" className="voicebots-container">
+      <Grid item xs={1} className="voiq-title">
         Voicebots
       </Grid>
       <Grid item xs={11} className="voicebots-table">

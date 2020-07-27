@@ -2,7 +2,6 @@
 
 .voicebots-container {
   height: 100%;
-  padding-top: 50px;
 }
 
 .voicebots-first-item {
@@ -19,10 +18,7 @@
   color: $voiq-blue !important;
 }
 
-.voicebots-list-container {
-
-}
-
-.voicebots-list-title {
-  font-size: 48px;
+.voicebots-table {
+  width: 100%;
+  max-width: 100% !important;
 }

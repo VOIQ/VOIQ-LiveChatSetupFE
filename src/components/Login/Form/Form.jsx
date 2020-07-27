@@ -110,7 +110,7 @@ const Form = () => {
         </div>
         { renderTou() }
         <Box textAlign="center">
-          <Button type="submit" color="primary" className="voiq-button-primary">
+          <Button type="submit" color="primary" className="voiq-button-primary voiq-login-button">
             Login
           </Button>
         </Box>

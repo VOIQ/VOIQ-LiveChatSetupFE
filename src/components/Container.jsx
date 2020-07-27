@@ -39,7 +39,7 @@ const PrivateRoute = ({children, ...props}) => {
           return children;
         } else {
           return (
-            <Grid container spacing={3} direction="row" alignItems="center" justify="center" className="voicebots-container">
+            <Grid container direction="row" alignItems="center" justify="center" className="voicebots-container">
               <CircularProgress className="voicebot-progress" />
             </Grid>
           );

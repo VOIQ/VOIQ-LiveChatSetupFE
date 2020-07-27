@@ -3,12 +3,10 @@ const errorsHelper = require('../helpers/ErrorsHelper');
 
 axios.defaults.withCredentials = true;
 
-module.exports.create = (voicebot_name, history, responseCallback) => {
+module.exports.create = (data, history, responseCallback) => {
   axios.post(
-    "http://localhost:4000/api/voicebots",
-    {
-      "voicebot_name": voicebot_name
-    }
+    "http://localhost:4000/api/intents",
+    data
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -18,9 +16,9 @@ module.exports.create = (voicebot_name, history, responseCallback) => {
   });
 }
 
-module.exports.read = (voicebotId, history, responseCallback) => {
+module.exports.read = (intentId, history, responseCallback) => {
   axios.get(
-    "http://localhost:4000/api/voicebots/"+voicebotId
+    "http://localhost:4000/api/intents/"+intentId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -32,7 +30,7 @@ module.exports.read = (voicebotId, history, responseCallback) => {
 
 module.exports.readAll = (history, responseCallback) => {
   axios.get(
-    "http://localhost:4000/api/voicebots"
+    "http://localhost:4000/api/intents"
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -42,9 +40,9 @@ module.exports.readAll = (history, responseCallback) => {
   });
 }
 
-module.exports.update = (voicebotId, data, history, responseCallback) => {
+module.exports.update = (intentId, data, history, responseCallback) => {
   axios.put(
-    "http://localhost:4000/api/voicebots/"+voicebotId,
+    "http://localhost:4000/api/intents/"+intentId,
     data
   ).then((response) => {
     responseCallback(response.data);

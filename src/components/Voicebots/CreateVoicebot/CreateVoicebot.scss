@@ -3,6 +3,7 @@
 .create-voicebot-form{
   max-width: 100% !important;
   text-align: center;
+  padding-left: 20px !important;
 
   form {
     width: 80%;
@@ -19,9 +20,4 @@
       margin-top: 20px;
     }
   }
-}
-
-.create-voicebot-title {
-  max-width: 100% !important;
-  font-size: 48px;
 }
