@@ -2,15 +2,15 @@ import React, {useEffect, useState} from "react";
 
 import './Customize.scss';
 
-import VoicebotImagesService from '../../../../services/VoicebotImagesService';
+import VoicebotImagesService from '../../../../../services/VoicebotImagesService';
 
 import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import {useHistory} from "react-router-dom";
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import VoicesTable from "./VoicesTable";
 
 const Customize = (props) => {
   const history = useHistory();
@@ -68,7 +68,7 @@ const Customize = (props) => {
 
   return (
     <Grid container direction="column">
-      <Grid item xs={4} className="customize-avatar-item">
+      <Grid item xs={4} className="customize-item">
         <Grid container direction="row">
           <Grid item xs={10}>
             <Typography>Upload photo</Typography>
@@ -84,10 +84,9 @@ const Customize = (props) => {
           </Grid>
         </Grid>
       </Grid>
-      <Grid item xs={8}>
-        Select a voice
-        <Divider/>
-        Voices table
+      <Grid item xs={8} className="customize-item voices-item">
+        <Typography>Select a voice</Typography>
+        <VoicesTable voicebot_id={voicebotId}/>
       </Grid>
     </Grid>
   );

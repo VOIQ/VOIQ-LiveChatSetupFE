@@ -1,13 +1,13 @@
 import React from "react";
 
 import Grid from "@material-ui/core/Grid";
-import StandardFaqs from "./TrainOptions/StandardFaqs/StandardFaqs";
+import StandardFaqs from "./StandardFaqs/StandardFaqs";
 
-const Train = () => {
+const Train = (props) => {
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
-        <StandardFaqs/>
+        <StandardFaqs voicebot_id={props.voicebot_id}/>
       </Grid>
     </Grid>
   );

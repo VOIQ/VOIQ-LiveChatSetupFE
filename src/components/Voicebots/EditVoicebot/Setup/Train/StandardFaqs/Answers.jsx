@@ -27,6 +27,7 @@ const Answers = (props) => {
   const addAnswer = (_event) => {
     IntentResponsesService.create(
       selectedIntent,
+      props.voicebot_id,
       "",
       history,
       (response) => {

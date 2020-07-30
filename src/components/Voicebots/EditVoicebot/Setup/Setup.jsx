@@ -6,8 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from "@material-ui/core/Typography";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 
-import Customize from "./Customize";
-import Train from "./Train";
+import Customize from "./Customize/Customize";
+import Train from "./Train/Train";
 
 const Setup = (props) => {
   return (
@@ -33,7 +33,7 @@ const Setup = (props) => {
           <Typography>Train</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Train />
+          <Train voicebot_id={props.voicebot_id}/>
         </AccordionDetails>
       </Accordion>
       <Accordion>

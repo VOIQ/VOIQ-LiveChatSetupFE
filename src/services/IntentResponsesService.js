@@ -3,17 +3,19 @@ const errorsHelper = require('../helpers/ErrorsHelper');
 
 axios.defaults.withCredentials = true;
 
-module.exports.create = (intentId, responseText, history, responseCallback) => {
+module.exports.create = (intentId, voicebotId, responseText, history, responseCallback) => {
   axios.post(
     "http://localhost:4000/api/intent_responses",
     {
       "intent_id": intentId,
+      "voicebot_id": voicebotId,
       "response": responseText
     }
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
     console.log("ERROR");
+    console.log(error);
     console.log(error.response);
     errorsHelper.handleAxiosError(history, error);
   });
@@ -43,7 +45,7 @@ module.exports.read = (intentResponseId, history, responseCallback) => {
   });
 }
 
-module.exports.readAll = (intentId, history, responseCallback) => {
+module.exports.readAll = (intentId, voicebotId, history, responseCallback) => {
   axios.get(
     "http://localhost:4000/api/intent_responses",
     {

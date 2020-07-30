@@ -28,9 +28,14 @@ module.exports.read = (intentId, history, responseCallback) => {
   });
 }
 
-module.exports.readAll = (history, responseCallback) => {
+module.exports.readAll = (voicebotId, history, responseCallback) => {
   axios.get(
-    "http://localhost:4000/api/intents"
+    "http://localhost:4000/api/intents",
+    {
+      params: {
+        voicebot_id: voicebotId
+      }
+    }
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {

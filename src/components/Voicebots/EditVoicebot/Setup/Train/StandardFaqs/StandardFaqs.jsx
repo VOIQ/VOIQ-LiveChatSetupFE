@@ -9,7 +9,7 @@ import './StandardFaqs.scss';
 import Questions from "./Questions";
 import Answers from "./Answers";
 
-const StandardFaqs = () => {
+const StandardFaqs = (props) => {
   const [selectedIntent, setSelectedIntent] = useState(null);
   const [answersCount, setAnswersCount] = useState(0);
   const answers = useRef(null);
@@ -30,6 +30,7 @@ const StandardFaqs = () => {
               answers={answers}
               set_answers_count={setAnswersCount}
               selected_intent={selectedIntent}
+              voicebot_id={props.voicebot_id}
             />
           </Grid>
           <Grid item xs={6} className="standard-faq-answers">
@@ -39,6 +40,7 @@ const StandardFaqs = () => {
               answers_count={answersCount}
               set_answers_count={setAnswersCount}
               selected_intent={selectedIntent}
+              voicebot_id={props.voicebot_id}
             />
           </Grid>
         </Grid>

@@ -17,9 +17,11 @@ const Questions = (props) => {
   const setSelectedIntent = props.set_selected_intent;
   const answers = props.answers;
   const setAnswersCount = props.set_answers_count;
+  const voicebotId = props.voicebot_id;
 
   useEffect(() => {
     IntentsService.readAll(
+      voicebotId,
       history,
       (response) => {
         questions.current = response;
@@ -28,6 +30,7 @@ const Questions = (props) => {
 
         IntentResponsesService.readAll(
           intentId,
+          voicebotId,
           history,
           (intentResponse) => {
             console.log("Intent Response");
@@ -38,7 +41,7 @@ const Questions = (props) => {
         );
       }
     );
-  }, [history, questions, answers, setAnswersCount, setSelectedIntent]);
+  }, [history, questions, answers, setAnswersCount, setSelectedIntent, voicebotId]);
 
   const onQuestionClick = (intent) => {
     console.log(intent);
@@ -46,6 +49,7 @@ const Questions = (props) => {
     setSelectedIntent(null);
     IntentResponsesService.readAll(
       intent,
+      props.voicebot_id,
       history,
       (intentResponse) => {
         answers.current = intentResponse;
