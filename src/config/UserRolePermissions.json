@@ -11,5 +11,18 @@
       "getHelp",
       "createBot"
     ]
-  }
+  },
+  "client_admin": {
+    "items": [
+      "voicebots",
+      "qa",
+      "divider",
+      "settings",
+      "account",
+      "logout",
+      "divider",
+      "getHelp",
+      "createBot"
+    ]
+  },
 }
