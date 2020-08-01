@@ -51,7 +51,7 @@ const EditVoicebot = () => {
   }
 
   return (
-    <Grid container direction="column" className="voicebots-container">
+    <Grid container direction="column" className="voicebots-container" wrap="nowrap">
       <Grid item xs={1} className="voiq-title">
         <TextField id="voicebot-name" value={voicebotName} onBlur={onVoicebotNameBlur} onChange={onVoicebotNameChange}/>
       </Grid>
@@ -59,14 +59,10 @@ const EditVoicebot = () => {
         <TabContext value={currentTab}>
           <TabList onChange={onTabChange} aria-label="simple tabs example">
             <Tab label="Setup" value="1" />
-            <Tab label="Item Two" value="2" />
-            <Tab label="Item Three" value="3" />
           </TabList>
           <TabPanel value="1">
-            <Setup voicebot_id={id}/>
+            <Setup voicebotId={id}/>
           </TabPanel>
-          <TabPanel value="2">Item Two</TabPanel>
-          <TabPanel value="3">Item Three</TabPanel>
         </TabContext>
       </Grid>
     </Grid>

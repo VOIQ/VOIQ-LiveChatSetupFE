@@ -1,10 +1,11 @@
 const axios = require('axios');
+const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
 module.exports.authenticate = (email, password, responseCallback) => {
   axios.post(
-  "http://localhost:4000/api/authenticate",
+  config.apiUrl+"/api/authenticate",
   {
     email: email,
     password: password
@@ -18,7 +19,7 @@ module.exports.authenticate = (email, password, responseCallback) => {
 
 module.exports.authenticatedPing = (responseCallback) => {
   axios.get(
-  "http://localhost:4000/api/authenticate/ping"
+  config.apiUrl+"/api/authenticate/ping"
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {

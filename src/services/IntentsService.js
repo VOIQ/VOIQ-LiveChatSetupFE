@@ -1,11 +1,12 @@
 const axios = require('axios');
 const errorsHelper = require('../helpers/ErrorsHelper');
+const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
 module.exports.create = (data, history, responseCallback) => {
   axios.post(
-    "http://localhost:4000/api/intents",
+    config.apiUrl+"/api/intents",
     data
   ).then((response) => {
     responseCallback(response.data);
@@ -18,7 +19,7 @@ module.exports.create = (data, history, responseCallback) => {
 
 module.exports.read = (intentId, history, responseCallback) => {
   axios.get(
-    "http://localhost:4000/api/intents/"+intentId
+    config.apiUrl+"/api/intents/"+intentId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -30,7 +31,7 @@ module.exports.read = (intentId, history, responseCallback) => {
 
 module.exports.readAll = (voicebotId, history, responseCallback) => {
   axios.get(
-    "http://localhost:4000/api/intents",
+    config.apiUrl+"/api/intents",
     {
       params: {
         voicebot_id: voicebotId
@@ -40,6 +41,7 @@ module.exports.readAll = (voicebotId, history, responseCallback) => {
     responseCallback(response.data);
   }).catch((error) => {
     console.log("ERROR");
+    console.log(error);
     console.log(error.response);
     errorsHelper.handleAxiosError(history, error);
   });
@@ -47,7 +49,7 @@ module.exports.readAll = (voicebotId, history, responseCallback) => {
 
 module.exports.update = (intentId, data, history, responseCallback) => {
   axios.put(
-    "http://localhost:4000/api/intents/"+intentId,
+    config.apiUrl+"/api/intents/"+intentId,
     data
   ).then((response) => {
     responseCallback(response.data);

@@ -10,7 +10,7 @@ import MaterialTable from 'material-table';
 const VoicesTable = (props) => {
   const history = useHistory();
   const [voicesPage, setVoicesPage] = useState(null);
-  const voicebotId = props.voicebot_id;
+  const voicebotId = props.voicebotId;
   const voices = useRef(null);
 
   useEffect(() => {

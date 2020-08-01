@@ -10,11 +10,10 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import {useHistory} from "react-router-dom";
 import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
-import VoicesTable from "./VoicesTable";
 
 const Customize = (props) => {
   const history = useHistory();
-  const voicebotId = props.voicebot_id;
+  const voicebotId = props.voicebotId;
   const [imageUrl, setImageUrl] = useState(null);
 
   useEffect(() => {
@@ -68,7 +67,7 @@ const Customize = (props) => {
 
   return (
     <Grid container direction="column">
-      <Grid item xs={4} className="customize-item">
+      <Grid item xs={12} className="customize-item">
         <Grid container direction="row">
           <Grid item xs={10}>
             <Typography>Upload photo</Typography>
@@ -83,10 +82,6 @@ const Customize = (props) => {
             </label>
           </Grid>
         </Grid>
-      </Grid>
-      <Grid item xs={8} className="customize-item voices-item">
-        <Typography>Select a voice</Typography>
-        <VoicesTable voicebot_id={voicebotId}/>
       </Grid>
     </Grid>
   );

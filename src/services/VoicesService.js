@@ -1,11 +1,12 @@
 const axios = require('axios');
 const errorsHelper = require('../helpers/ErrorsHelper');
+const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
 module.exports.read = (voiceId, history, responseCallback) => {
   axios.get(
-    "http://localhost:4000/api/voices/"+voiceId
+    config.apiUrl+"/api/voices/"+voiceId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -17,7 +18,7 @@ module.exports.read = (voiceId, history, responseCallback) => {
 
 module.exports.readAll = (history, responseCallback) => {
   axios.get(
-    "http://localhost:4000/api/voices"
+    config.apiUrl+"/api/voices"
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {

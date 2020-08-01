@@ -4,13 +4,11 @@ const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
-module.exports.create = (file, fileType, voicebotId, history, responseCallback) => {
+module.exports.generateAll = (voicebotId, history, responseCallback) => {
   axios.post(
-    config.apiUrl+"/api/voicebot_images",
+    config.apiUrl+"/api/voicebots/responses",
     {
-      voicebot_id: voicebotId,
-      file: file,
-      file_type: fileType
+      "voicebot_id": voicebotId
     }
   ).then((response) => {
     responseCallback(response.data);
@@ -21,9 +19,14 @@ module.exports.create = (file, fileType, voicebotId, history, responseCallback) 
   });
 }
 
-module.exports.read = (voicebotId, history, responseCallback) => {
+module.exports.progress = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl+"/api/voicebot_images/"+voicebotId
+    config.apiUrl+"/api/voicebots/responses/progress",
+    {
+      params: {
+        voicebot_id: voicebotId
+      }
+    }
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {

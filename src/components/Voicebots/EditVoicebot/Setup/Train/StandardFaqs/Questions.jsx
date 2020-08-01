@@ -3,8 +3,6 @@ import React, {useEffect} from "react";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
-import Grid from "@material-ui/core/Grid";
-import {CircularProgress} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 
 import IntentsService from "../../../../../../services/IntentsService";
@@ -12,12 +10,13 @@ import IntentResponsesService from "../../../../../../services/IntentResponsesSe
 
 const Questions = (props) => {
   const history = useHistory();
-  const questions = props.questions;
-  const selectedIntent = props.selected_intent;
-  const setSelectedIntent = props.set_selected_intent;
   const answers = props.answers;
-  const setAnswersCount = props.set_answers_count;
-  const voicebotId = props.voicebot_id;
+  const setAnswersLength = props.setAnswersLength;
+  const questions = props.questions;
+  const setQuestionsLength = props.setQuestionsLength;
+  const selectedIntent = props.selectedIntent;
+  const setSelectedIntent = props.setSelectedIntent;
+  const voicebotId = props.voicebotId;
 
   useEffect(() => {
     IntentsService.readAll(
@@ -25,7 +24,8 @@ const Questions = (props) => {
       history,
       (response) => {
         questions.current = response;
-        let intentId = questions.current[0].id
+        let intentId = questions.current[0].id;
+        setQuestionsLength(questions.current.length);
         setSelectedIntent(intentId);
 
         IntentResponsesService.readAll(
@@ -35,54 +35,65 @@ const Questions = (props) => {
           (intentResponse) => {
             console.log("Intent Response");
             console.log(intentResponse);
+
             answers.current = intentResponse;
-            setAnswersCount(intentResponse.length);
+            setAnswersLength(answers.current.length);
           }
         );
       }
     );
-  }, [history, questions, answers, setAnswersCount, setSelectedIntent, voicebotId]);
+  }, [history, answers, questions, setAnswersLength, setQuestionsLength, setSelectedIntent, voicebotId]);
 
-  const onQuestionClick = (intent) => {
-    console.log(intent);
-    answers.current = null;
-    setSelectedIntent(null);
+  useEffect(() => {
     IntentResponsesService.readAll(
-      intent,
-      props.voicebot_id,
+      selectedIntent,
+      voicebotId,
       history,
       (intentResponse) => {
         answers.current = intentResponse;
-        setSelectedIntent(intent);
+
+        // TODO: Review better approach, I can't directly use the arrays coming from the API as state because it will
+        //    // always detect it as a change of state, to avoid using a data normalizer to be able to compare the
+        //    // data inside the arrays I created references and manually updated the length state,
+        //    // when I activate the bot the length is not changing but the data inside the arrays do.
+        setAnswersLength(null);
+        setAnswersLength(intentResponse.length);
+      }
+    );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.generatedAt]);
+
+  const onQuestionClick = (intentId) => {
+    IntentResponsesService.readAll(
+      intentId,
+      props.voicebotId,
+      history,
+      (intentResponse) => {
+        answers.current = intentResponse;
+        setAnswersLength(answers.current.length);
+        setSelectedIntent(intentId);
       }
     );
   }
 
-  if (questions.current) {
-    let questionsList = questions.current.map((question) => {
-      return (
-        <ListItem
-          button
-          key={`${question.id}`}
-          selected={question.id === selectedIntent}
-          onClick={() => {onQuestionClick(question.id)}}
-        >
-          <ListItemText primary={question.name} />
-        </ListItem>
-      );
-    });
-    return (
-      <List component="nav" aria-label="main mailbox folders">
-        {questionsList}
-      </List>
-    );
-  } else {
-    return (
-      <Grid container direction="row" alignItems="center" justify="center" className="voicebots-container">
-        <CircularProgress className="voicebot-progress" />
-      </Grid>
-    );
-  }
+  return (
+    <List component="nav" aria-label="main mailbox folders">
+      {
+        questions.current.map((question) => (
+            <ListItem
+              button
+              key={`${question.id}`}
+              selected={question.id === selectedIntent}
+              onClick={() => {onQuestionClick(question.id)}}
+              generated_at={props.generated_at}
+            >
+              <ListItemText primary={question.name} />
+            </ListItem>
+          )
+        )
+      }
+    </List>
+  );
 }
 
 export default Questions;

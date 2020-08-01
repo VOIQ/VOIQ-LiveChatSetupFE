@@ -11,9 +11,10 @@ import Answers from "./Answers";
 
 const StandardFaqs = (props) => {
   const [selectedIntent, setSelectedIntent] = useState(null);
-  const [answersCount, setAnswersCount] = useState(0);
-  const answers = useRef(null);
-  const questions = useRef(null);
+  const [answersLength, setAnswersLength] = useState(0);
+  const answers = useRef([]);
+  const [questionsLength, setQuestionsLength] = useState(0);
+  const questions = useRef([]);
 
   return (
     <Grid container direction="column" spacing={2} className="option-container">
@@ -25,22 +26,26 @@ const StandardFaqs = (props) => {
           <Grid item xs={6} className="standard-faq-questions">
             <Typography>Questions</Typography>
             <Questions
-              questions={questions}
-              set_selected_intent={setSelectedIntent}
+              setAnswersLength={setAnswersLength}
+              setQuestionsLength={setQuestionsLength}
+              questionsLength={questionsLength}
+              setSelectedIntent={setSelectedIntent}
+              selectedIntent={selectedIntent}
+              voicebotId={props.voicebotId}
+              generatedAt={props.generatedAt}
               answers={answers}
-              set_answers_count={setAnswersCount}
-              selected_intent={selectedIntent}
-              voicebot_id={props.voicebot_id}
+              questions={questions}
             />
           </Grid>
           <Grid item xs={6} className="standard-faq-answers">
             <Typography>Answers</Typography>
             <Answers
+              setAnswersLength={setAnswersLength}
+              answersLength={answersLength}
+              selectedIntent={selectedIntent}
+              voicebotId={props.voicebotId}
+              generatedAt={props.generatedAt}
               answers={answers}
-              answers_count={answersCount}
-              set_answers_count={setAnswersCount}
-              selected_intent={selectedIntent}
-              voicebot_id={props.voicebot_id}
             />
           </Grid>
         </Grid>

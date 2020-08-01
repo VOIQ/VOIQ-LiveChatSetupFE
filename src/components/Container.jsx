@@ -13,6 +13,7 @@ import EditVoicebot from "./Voicebots/EditVoicebot/EditVoicebot";
 const PrivateRoute = ({children, ...props}) => {
   const history = useHistory();
 
+  // TODO: Verify what happens if role doesn't have access
   useEffect(() => {
     try {
       LoginService.authenticatedPing(
