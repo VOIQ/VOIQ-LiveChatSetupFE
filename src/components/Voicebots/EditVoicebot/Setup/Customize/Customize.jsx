@@ -31,7 +31,6 @@ const Customize = (props) => {
   const onFileChange = (event) => {
     const reader = new FileReader();
     let file = event.target.files[0]
-    console.log(file);
     reader.readAsDataURL(file);
     let readerResult = null;
     reader.addEventListener("load", function () {

@@ -33,9 +33,6 @@ const Questions = (props) => {
           voicebotId,
           history,
           (intentResponse) => {
-            console.log("Intent Response");
-            console.log(intentResponse);
-
             answers.current = intentResponse;
             setAnswersLength(answers.current.length);
           }

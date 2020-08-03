@@ -22,7 +22,6 @@ const CreateVoicebot = () => {
         values['voicebot_name'],
         history,
         (response) => {
-          console.log(response);
           if (response.status && response.status === 'OK') {
             history.push('/voicebots');
           }

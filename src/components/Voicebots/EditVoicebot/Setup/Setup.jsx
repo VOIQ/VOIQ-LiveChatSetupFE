@@ -33,7 +33,6 @@ const Setup = (props) => {
       props.voicebotId,
       history,
       (response) => {
-        console.log(response);
         if (response.percentage === 100) {
           setGeneratedAt(Date.now().toString());
         } else {

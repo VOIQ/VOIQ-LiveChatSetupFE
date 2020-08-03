@@ -9,8 +9,7 @@ module.exports.authenticate = (email, password, responseCallback) => {
   {
     email: email,
     password: password
-    }).then((response) => {
-    console.log(response);
+  }).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
     console.log(error);

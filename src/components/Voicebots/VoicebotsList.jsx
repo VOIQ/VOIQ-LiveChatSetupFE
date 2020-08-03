@@ -18,7 +18,6 @@ const VoicebotList = (props) => {
   const history = useHistory();
 
   const onEditClick = (voicebotId) => {
-    console.log(voicebotId);
     history.push('/voicebots/edit/'+voicebotId);
   }
 

@@ -24,8 +24,6 @@ const EditVoicebot = () => {
       id,
       history,
       (response) => {
-        console.log("EditVoicebot Effect");
-        console.log(response);
         setVoicebotName(response.name);
       }
     );
@@ -37,7 +35,7 @@ const EditVoicebot = () => {
       { "name": voicebotName },
       history,
       (response) => {
-        console.log(response);
+        // TODO: Handle response?
       }
     );
   }

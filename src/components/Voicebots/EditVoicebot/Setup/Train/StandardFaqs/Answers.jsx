@@ -38,7 +38,6 @@ const Answers = (props) => {
       answerId,
       history,
       (response) => {
-        console.log(response);
         answers.current = answers.current.filter((answer) => {
           return answer.id !== answerId;
         });

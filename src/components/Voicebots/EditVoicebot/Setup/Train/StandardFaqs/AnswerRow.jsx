@@ -14,13 +14,12 @@ const AnswerRow = (props) => {
   const [answerText, setAnswer] = useState(props.answers.current[props.answersIndex].response || "");
 
   const onAnswerBlur = (event) => {
-    console.log(event.target);
     IntentResponsesService.update(
       event.target.id,
       event.target.value,
       history,
       (response) => {
-        console.log(response);
+        // TODO: Handle response?
       }
     );
   }
