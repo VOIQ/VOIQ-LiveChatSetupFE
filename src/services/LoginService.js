@@ -5,7 +5,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.authenticate = (email, password, responseCallback) => {
   axios.post(
-  config.apiUrl+"/api/authenticate",
+  config.apiUrl + "/api/authenticate",
   {
     email: email,
     password: password
@@ -18,7 +18,7 @@ module.exports.authenticate = (email, password, responseCallback) => {
 
 module.exports.authenticatedPing = (responseCallback) => {
   axios.get(
-  config.apiUrl+"/api/authenticate/ping"
+  config.apiUrl + "/api/authenticate/ping"
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {

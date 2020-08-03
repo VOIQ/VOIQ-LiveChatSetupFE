@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.generateAll = (voicebotId, history, responseCallback) => {
   axios.post(
-    config.apiUrl+"/api/voicebots/responses",
+    config.apiUrl + "/api/voicebots/responses",
     {
       "voicebot_id": voicebotId
     }
@@ -21,7 +21,7 @@ module.exports.generateAll = (voicebotId, history, responseCallback) => {
 
 module.exports.progress = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl+"/api/voicebots/responses/progress",
+    config.apiUrl + "/api/voicebots/responses/progress",
     {
       params: {
         voicebot_id: voicebotId
