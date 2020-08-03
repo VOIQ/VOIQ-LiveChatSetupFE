@@ -3,6 +3,7 @@ import React, {useState} from "react";
 import Customize from "./Customize/Customize";
 import Train from "./Train/Train";
 import VoicebotResponsesService from '../../../../services/VoicebotResponsesService';
+import Install from "./Install/Install";
 
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -79,9 +80,7 @@ const Setup = (props) => {
           <Typography>Install</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Install
-          </Typography>
+          <Install voicebotId={props.voicebotId}/>
         </AccordionDetails>
       </Accordion>
       <Box display="flex" justifyContent="flex-end">
