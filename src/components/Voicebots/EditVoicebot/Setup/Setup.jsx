@@ -1,15 +1,49 @@
-import React from "react";
+import React, {useState} from "react";
+
+import Customize from "./Customize/Customize";
+import Train from "./Train/Train";
+import VoicebotResponsesService from '../../../../services/VoicebotResponsesService';
+import Install from "./Install/Install";
 
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from "@material-ui/core/Typography";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
-
-import Customize from "./Customize/Customize";
-import Train from "./Train/Train";
+import Button from "@material-ui/core/Button";
+import {Box} from "@material-ui/core";
+import {useHistory} from "react-router-dom";
 
 const Setup = (props) => {
+  const [generatedAt, setGeneratedAt] = useState(null);
+  const history = useHistory();
+
+  const onActivate = () => {
+    VoicebotResponsesService.generateAll(
+      props.voicebotId,
+      history,
+      (response) => {
+        updateGenerateProgress();
+      }
+    );
+  }
+
+  const updateGenerateProgress = () => {
+    VoicebotResponsesService.progress(
+      props.voicebotId,
+      history,
+      (response) => {
+        if (response.percentage === 100) {
+          setGeneratedAt(Date.now().toString());
+        } else {
+          setTimeout(function(){
+            updateGenerateProgress();
+          }, 2000);
+        }
+      }
+    );
+  }
+
   return (
     <div className="voicebot-setup">
       <Accordion>
@@ -21,7 +55,7 @@ const Setup = (props) => {
           <Typography>Customize</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Customize voicebot_id={props.voicebot_id}/>
+          <Customize voicebotId={props.voicebotId}/>
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -33,7 +67,7 @@ const Setup = (props) => {
           <Typography>Train</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Train voicebot_id={props.voicebot_id}/>
+          <Train voicebotId={props.voicebotId} generatedAt={generatedAt}/>
         </AccordionDetails>
       </Accordion>
       <Accordion>
@@ -45,11 +79,14 @@ const Setup = (props) => {
           <Typography>Install</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Install
-          </Typography>
+          <Install voicebotId={props.voicebotId}/>
         </AccordionDetails>
       </Accordion>
+      <Box display="flex" justifyContent="flex-end">
+        <Button className="voiq-button-primary activate-button" onClick={onActivate}>
+          Activate
+        </Button>
+      </Box>
     </div>
   );
 }

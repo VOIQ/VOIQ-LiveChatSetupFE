@@ -7,7 +7,7 @@ const Train = (props) => {
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
-        <StandardFaqs voicebot_id={props.voicebot_id}/>
+        <StandardFaqs voicebotId={props.voicebotId} generatedAt={props.generatedAt}/>
       </Grid>
     </Grid>
   );

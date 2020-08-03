@@ -1,7 +1,7 @@
 import React from "react";
 
 import IntentResponsesService from "../../../../../../services/IntentResponsesService";
-import AnswerField from "./AnswerField";
+import AnswerRow from "./AnswerRow";
 
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
@@ -12,27 +12,23 @@ import TableBody from "@material-ui/core/TableBody";
 import ListItem from "@material-ui/core/ListItem";
 import AddIcon from "@material-ui/icons/Add";
 import {useHistory} from "react-router-dom";
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from "@material-ui/core/IconButton";
-import Grid from "@material-ui/core/Grid";
 
 const Answers = (props) => {
   const history = useHistory();
   const answers = props.answers;
-  const answersCount = props.answers_count;
-  const setAnswersCount = props.set_answers_count;
-  const selectedIntent = props.selected_intent;
-  let answersList = []
+  const answersLength = props.answers_length;
+  const setAnswersLength = props.setAnswersLength;
+  const selectedIntent = props.selectedIntent;
 
   const addAnswer = (_event) => {
     IntentResponsesService.create(
       selectedIntent,
-      props.voicebot_id,
+      props.voicebotId,
       "",
       history,
       (response) => {
-        answers.current.push(response.intent_response);
-        setAnswersCount(answers.current.length);
+        answers.current = [...answers.current, response.intent_response];
+        setAnswersLength(answers.current.length);
       }
     );
   }
@@ -42,41 +38,27 @@ const Answers = (props) => {
       answerId,
       history,
       (response) => {
-        console.log(response);
         answers.current = answers.current.filter((answer) => {
           return answer.id !== answerId;
         });
-        setAnswersCount(answersCount - 1);
+        setAnswersLength(answers.current.length);
       }
     );
   }
 
-  if (answers.current) {
-    answersList = answers.current.map((answer) => {
-      return (
-        <TableRow key={answer.id}>
-          <TableCell component="th" scope="row">
-            <Grid container direction="row">
-              <Grid item xs={11}>
-                <AnswerField answer={answer}/>
-              </Grid>
-              <Grid item xs={1}>
-                <IconButton aria-label="delete" className="delete-answer" onClick={() => {removeAnswer(answer.id)}}>
-                  <DeleteIcon />
-                </IconButton>
-              </Grid>
-            </Grid>
-          </TableCell>
-        </TableRow>
-      )
-    });
-  }
-
   return (
-    <TableContainer component={Paper} answers_count={answersCount}>
+    <TableContainer component={Paper}>
       <Table size="small" aria-label="simple table">
-        <TableBody>
-          {answersList}
+        <TableBody answers_length={answersLength}>
+          {
+            answers.current.map((answer, index) => (
+              <TableRow key={answer.id}>
+                <TableCell component="th" scope="row">
+                  <AnswerRow answers={answers} answersIndex={index} onRemoveAnswer={removeAnswer} generatedAt={props.generatedAt}/>
+                </TableCell>
+              </TableRow>
+            ))
+          }
         </TableBody>
       </Table>
       <ListItem

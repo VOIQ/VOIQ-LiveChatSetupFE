@@ -4,9 +4,12 @@ const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
-module.exports.read = (voiceId, history, responseCallback) => {
-  axios.get(
-    config.apiUrl + "/api/voices/"+voiceId
+module.exports.generateAll = (voicebotId, history, responseCallback) => {
+  axios.post(
+    config.apiUrl + "/api/voicebots/responses",
+    {
+      "voicebot_id": voicebotId
+    }
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -16,9 +19,14 @@ module.exports.read = (voiceId, history, responseCallback) => {
   });
 }
 
-module.exports.readAll = (history, responseCallback) => {
+module.exports.progress = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voices"
+    config.apiUrl + "/api/voicebots/responses/progress",
+    {
+      params: {
+        voicebot_id: voicebotId
+      }
+    }
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
