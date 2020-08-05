@@ -76,7 +76,7 @@ const Questions = (props) => {
   return (
     <List component="nav" aria-label="main mailbox folders">
       {
-        questions.current.map((question) => (
+        questions.current && questions.current.map((question) => (
             <ListItem
               button
               key={`${question.id}`}

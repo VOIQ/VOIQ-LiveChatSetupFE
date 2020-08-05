@@ -1,18 +1,23 @@
 import React from "react";
 
+import LoginService from '../../../services/LoginService';
+
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {useHistory} from "react-router-dom";
 
 const LogoutListItem = (props) => {
+  const history = useHistory();
+
   return (
     <ListItem
       button
       className={`list-item ${props.open ? "list-item-open" : "list-item-closed"}`}
       key="Logout"
       onClick={() => {
-        console.log("Logout");
+        LoginService.logout(history);
       }}
     >
       <ListItemIcon

@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 
 import IntentResponsesService from "../../../../../../services/IntentResponsesService";
+import './AnswerRow.scss';
 
 import TextField from "@material-ui/core/TextField";
 import {useHistory} from "react-router-dom";
@@ -12,6 +13,7 @@ import CloudDoneIcon from '@material-ui/icons/CloudDone';
 const AnswerRow = (props) => {
   const history = useHistory();
   const [answerText, setAnswer] = useState(props.answers.current[props.answersIndex].response || "");
+  const [updated, setUpdated] = useState(false);
 
   const onAnswerBlur = (event) => {
     IntentResponsesService.update(
@@ -19,7 +21,7 @@ const AnswerRow = (props) => {
       event.target.value,
       history,
       (response) => {
-        // TODO: Handle response?
+        setUpdated(true)
       }
     );
   }
@@ -32,14 +34,17 @@ const AnswerRow = (props) => {
     <Grid container direction="row">
       <Grid item xs={10}>
         <TextField
+          multiline
+          rowsMax={4}
           id={`${props.answers.current[props.answersIndex].id}`}
           value={answerText}
           onBlur={onAnswerBlur}
           onChange={onAnswerChange}
+          className="answer-text-field"
         />
       </Grid>
       <Grid item xs={1} audio_id={props.answers.current[props.answersIndex].audio_id} generated_at={props.generatedAt}>
-        { props.answers.current[props.answersIndex].audio_id && <CloudDoneIcon/> }
+        { props.answers.current[props.answersIndex].audio_id && !updated && <CloudDoneIcon/> }
       </Grid>
       <Grid item xs={1}>
         <IconButton aria-label="delete" className="delete-answer" onClick={() => {props.onRemoveAnswer(props.answers.current[props.answersIndex].id)}}>

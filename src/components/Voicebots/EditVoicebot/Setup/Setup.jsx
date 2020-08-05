@@ -16,6 +16,7 @@ import {useHistory} from "react-router-dom";
 
 const Setup = (props) => {
   const [generatedAt, setGeneratedAt] = useState(null);
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const history = useHistory();
 
   const onActivate = () => {
@@ -23,6 +24,7 @@ const Setup = (props) => {
       props.voicebotId,
       history,
       (response) => {
+        setButtonDisabled(true);
         updateGenerateProgress();
       }
     );
@@ -35,6 +37,7 @@ const Setup = (props) => {
       (response) => {
         if (response.percentage === 100) {
           setGeneratedAt(Date.now().toString());
+          setButtonDisabled(false);
         } else {
           setTimeout(function(){
             updateGenerateProgress();
@@ -83,7 +86,7 @@ const Setup = (props) => {
         </AccordionDetails>
       </Accordion>
       <Box display="flex" justifyContent="flex-end">
-        <Button className="voiq-button-primary activate-button" onClick={onActivate}>
+        <Button disabled={buttonDisabled} className="voiq-button-primary activate-button" onClick={onActivate}>
           Activate
         </Button>
       </Box>
