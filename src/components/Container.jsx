@@ -17,6 +17,7 @@ const PrivateRoute = ({children, ...props}) => {
   useEffect(() => {
     try {
       LoginService.authenticatedPing(
+        history,
         (response) => {
           // TODO: We need to standardize the responses and create/use error codes or HTTP error codes.
           if (response.error) {
