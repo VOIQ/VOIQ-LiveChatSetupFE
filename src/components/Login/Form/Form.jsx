@@ -33,6 +33,7 @@ const Form = () => {
     try {
       setBackendErrors([]);
       LoginService.authenticate(
+        history,
         values.email,
         values.password,
         (response) => {
