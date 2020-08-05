@@ -32,7 +32,7 @@ const CreateVoicebot = () => {
     }
   }
   return (
-    <Grid container spacing={1} direction="column" className="voicebots-container">
+    <Grid container wrap="nowrap" spacing={1} direction="column" className="voicebots-container">
       <Grid item xs={1} className="voiq-title">
         Create Voicebot
       </Grid>
