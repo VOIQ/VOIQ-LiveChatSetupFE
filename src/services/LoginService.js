@@ -1,5 +1,6 @@
 const axios = require('axios');
 const config = require('../config/voiq.json');
+const errorsHelper = require('../helpers/ErrorsHelper');
 
 axios.defaults.withCredentials = true;
 
@@ -12,7 +13,7 @@ module.exports.authenticate = (email, password, responseCallback) => {
   }).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
-    console.log(error);
+    errorsHelper.handleAxiosError(history, error);
   });
 }
 
@@ -22,7 +23,7 @@ module.exports.authenticatedPing = (responseCallback) => {
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
-    console.log(error);
+    errorsHelper.handleAxiosError(history, error);
   });
 }
 
