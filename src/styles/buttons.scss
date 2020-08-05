@@ -43,8 +43,8 @@
   &.MuiButton-root.disabled.active,
   &.MuiButton-root[disabled].active,
   fieldset[disabled] &.MuiButton-root.active {
-    background-color: $voiq-blue !important;
-    border-color: $voiq-blue !important;
+    background-color: $voiq-default-gray !important;
+    border-color: $voiq-default-gray !important;
   }
 
   &.MuiButton-root .badge {

@@ -25,3 +25,13 @@ module.exports.authenticatedPing = (responseCallback) => {
     console.log(error);
   });
 }
+
+module.exports.logout = (history) => {
+  axios.post(
+    config.apiUrl + "/api/authenticate/logout"
+  ).then((response) => {
+    history.push('/login');
+  }).catch((error) => {
+    console.log(error);
+  });
+}

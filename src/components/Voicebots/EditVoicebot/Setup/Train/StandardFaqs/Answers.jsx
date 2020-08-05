@@ -51,7 +51,7 @@ const Answers = (props) => {
       <Table size="small" aria-label="simple table">
         <TableBody answers_length={answersLength}>
           {
-            answers.current.map((answer, index) => (
+            answers.current && answers.current.map((answer, index) => (
               <TableRow key={answer.id}>
                 <TableCell component="th" scope="row">
                   <AnswerRow answers={answers} answersIndex={index} onRemoveAnswer={removeAnswer} generatedAt={props.generatedAt}/>
