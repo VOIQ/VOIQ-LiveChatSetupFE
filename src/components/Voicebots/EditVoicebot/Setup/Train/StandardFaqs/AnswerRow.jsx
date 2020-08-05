@@ -43,7 +43,7 @@ const AnswerRow = (props) => {
           className="answer-text-field"
         />
       </Grid>
-      <Grid item xs={1} audio_id={props.answers.current[props.answersIndex].audio_id} generated_at={props.generatedAt}>
+      <Grid item xs={1} audio_id={props.answers.current[props.answersIndex].audio_id} updated={updated} generated_at={props.generatedAt}>
         { props.answers.current[props.answersIndex].audio_id && !updated && <CloudDoneIcon/> }
       </Grid>
       <Grid item xs={1}>
