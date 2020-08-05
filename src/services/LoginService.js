@@ -4,7 +4,7 @@ const errorsHelper = require('../helpers/ErrorsHelper');
 
 axios.defaults.withCredentials = true;
 
-module.exports.authenticate = (email, password, responseCallback) => {
+module.exports.authenticate = (history, email, password, responseCallback) => {
   axios.post(
   config.apiUrl + "/api/authenticate",
   {
@@ -17,7 +17,7 @@ module.exports.authenticate = (email, password, responseCallback) => {
   });
 }
 
-module.exports.authenticatedPing = (responseCallback) => {
+module.exports.authenticatedPing = (history, responseCallback) => {
   axios.get(
   config.apiUrl + "/api/authenticate/ping"
   ).then((response) => {
