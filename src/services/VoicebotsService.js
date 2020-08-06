@@ -58,7 +58,7 @@ module.exports.update = (voicebotId, data, history, responseCallback) => {
 
 module.exports.delete = (voicebotId, history, responseCallback) => {
   axios.delete(
-    config.apiUrl + "/api/voicebots/"+voicebotId
+    config.apiUrl + "/api/voicebots/" + voicebotId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
