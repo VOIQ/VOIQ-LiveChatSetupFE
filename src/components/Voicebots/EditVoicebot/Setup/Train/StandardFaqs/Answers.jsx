@@ -16,8 +16,7 @@ import {useHistory} from "react-router-dom";
 const Answers = (props) => {
   const history = useHistory();
   const answers = props.answers;
-  const answersLength = props.answers_length;
-  const setAnswersLength = props.setAnswersLength;
+  const setAnswers = props.setAnswers;
   const selectedIntent = props.selectedIntent;
 
   const addAnswer = (_event) => {
@@ -27,8 +26,11 @@ const Answers = (props) => {
       "",
       history,
       (response) => {
-        answers.current = [...answers.current, response.intent_response];
-        setAnswersLength(answers.current.length);
+        console.log(response);
+        setAnswers(JSON.stringify([
+          ...JSON.parse(answers),
+          response.intent_response
+        ]));
       }
     );
   }
@@ -38,10 +40,11 @@ const Answers = (props) => {
       answerId,
       history,
       (response) => {
-        answers.current = answers.current.filter((answer) => {
+        let answersJson = JSON.parse(answers);
+        answersJson = answersJson.filter((answer) => {
           return answer.id !== answerId;
         });
-        setAnswersLength(answers.current.length);
+        setAnswers(JSON.stringify(answersJson));
       }
     );
   }
@@ -49,12 +52,18 @@ const Answers = (props) => {
   return (
     <TableContainer component={Paper}>
       <Table size="small" aria-label="simple table">
-        <TableBody answers_length={answersLength}>
+        <TableBody>
           {
-            answers.current && answers.current.map((answer, index) => (
+            JSON.parse(answers) && JSON.parse(answers).map((answer, index) => (
               <TableRow key={answer.id}>
                 <TableCell component="th" scope="row">
-                  <AnswerRow answers={answers} answersIndex={index} onRemoveAnswer={removeAnswer} generatedAt={props.generatedAt}/>
+                  <AnswerRow
+                    answer={answer}
+                    answers={answers}
+                    answerIndex={index}
+                    setAnswers={setAnswers}
+                    onRemoveAnswer={removeAnswer}
+                  />
                 </TableCell>
               </TableRow>
             ))

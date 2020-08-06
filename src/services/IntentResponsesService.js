@@ -51,7 +51,8 @@ module.exports.readAll = (intentId, voicebotId, history, responseCallback) => {
     config.apiUrl + "/api/intent_responses",
     {
       params: {
-        intent_id: intentId
+        intent_id: intentId,
+        voicebot_id: voicebotId
       }
     }
   ).then((response) => {
@@ -73,7 +74,7 @@ module.exports.update = (intentResponseId, answer, history, responseCallback) =>
     responseCallback(response.data);
   }).catch((error) => {
     console.log("ERROR");
-    console.log(error.response);
+    console.log(error);
     errorsHelper.handleAxiosError(history, error);
   });
 }
