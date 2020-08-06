@@ -53,7 +53,7 @@ const CreateVoicebot = () => {
               />
             </Box>
             <Box textAlign="right">
-              <Button type="submit" className="voiq-button-secondary">Creating</Button>
+              <Button type="submit" className="voiq-button-secondary">Create</Button>
             </Box>
           </form>
         </Box>

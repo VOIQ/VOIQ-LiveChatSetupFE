@@ -1,5 +1,9 @@
 import React from 'react';
 
+import './Voicebots.scss';
+import VoicebotsService from '../../services/VoicebotsService';
+
+import {useHistory} from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableRow from "@material-ui/core/TableRow";
@@ -10,9 +14,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from "@material-ui/core/IconButton";
-
-import './Voicebots.scss';
-import {useHistory} from "react-router-dom";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const VoicebotList = (props) => {
   const history = useHistory();
@@ -21,6 +23,22 @@ const VoicebotList = (props) => {
     history.push('/voicebots/edit/'+voicebotId);
   }
 
+  const onDeleteClick = (voicebotId) => {
+    VoicebotsService.delete(
+      voicebotId,
+      history,
+      (response) => {
+        console.log(response);
+        let voicebotsJson = JSON.parse(props.voicebots);
+        let voicebots = voicebotsJson.filter((voicebot) => {
+          return voicebot.id !== voicebotId;
+        });
+        props.setVoicebots(JSON.stringify(voicebots));
+      }
+    )
+  }
+
+  let voicebots = JSON.parse(props.voicebots);
   return (
     <Grid container direction="column" className="voicebots-container" wrap="nowrap">
       <Grid item xs={1} className="voiq-title">
@@ -33,10 +51,11 @@ const VoicebotList = (props) => {
               <TableRow>
                 <TableCell>Name</TableCell>
                 <TableCell padding="checkbox"/>
+                <TableCell padding="checkbox"/>
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.voicebots && props.voicebots.map((voicebot) => {
+              {voicebots && voicebots.map((voicebot) => {
                 return (
                   <TableRow key={voicebot.name}>
                     <TableCell>{voicebot.name}</TableCell>
@@ -44,7 +63,19 @@ const VoicebotList = (props) => {
                       <IconButton
                         aria-label="edit"
                         onClick={() => {
-                          // Need to do this  inline function because the click event
+                          // Need to do this inline function because the click event
+                          // in this icon button doesn't always have the same target
+                          onDeleteClick(voicebot.id);
+                        }}
+                      >
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                    <TableCell padding="checkbox">
+                      <IconButton
+                        aria-label="edit"
+                        onClick={() => {
+                          // Need to do this inline function because the click event
                           // in this icon button doesn't always have the same target
                           onEditClick(voicebot.id);
                         }}

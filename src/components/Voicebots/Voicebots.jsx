@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 
 import { CircularProgress, Grid } from "@material-ui/core";
 import {useHistory} from "react-router-dom";
@@ -12,29 +12,28 @@ import './Voicebots.scss';
 const Voicebots = () => {
   const history = useHistory();
   const [loading, setLoading] = React.useState(true);
-  const [hasVoicebots, setHasVoicebots] = React.useState(false);
-  const voicebots = useRef(null);
+  const [voicebots, setVoicebots] = useState("[]");
 
   useEffect(() => {
     VoicebotsService.readAll(
       history,
       (response) => {
         setLoading(false);
-        voicebots.current = response;
-        setHasVoicebots(response.length > 0);
+        setVoicebots(JSON.stringify(response));
       }
     );
   }, [history]);
 
+  let voicebotsJson = JSON.parse(voicebots);
   if (loading) {
     return (
       <Grid container spacing={3} direction="row" alignItems="center" justify="center" className="voicebots-container">
         <CircularProgress className="voicebot-progress" />
       </Grid>
     );
-  } else if (hasVoicebots) {
+  } else if (voicebotsJson.length) {
     return (
-      <VoicebotsList hasVoicebots={hasVoicebots} voicebots={voicebots.current}/>
+      <VoicebotsList voicebots={voicebots} setVoicebots={setVoicebots}/>
     );
   } else {
     return (

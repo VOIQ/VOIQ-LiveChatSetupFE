@@ -11,9 +11,9 @@ import IntentResponsesService from "../../../../../../services/IntentResponsesSe
 const Questions = (props) => {
   const history = useHistory();
   const answers = props.answers;
-  const setAnswersLength = props.setAnswersLength;
+  const setAnswers = props.setAnswers;
   const questions = props.questions;
-  const setQuestionsLength = props.setQuestionsLength;
+  const setQuestions = props.setQuestions;
   const selectedIntent = props.selectedIntent;
   const setSelectedIntent = props.setSelectedIntent;
   const voicebotId = props.voicebotId;
@@ -23,23 +23,25 @@ const Questions = (props) => {
       voicebotId,
       history,
       (response) => {
-        questions.current = response;
-        let intentId = questions.current[0].id;
-        setQuestionsLength(questions.current.length);
-        setSelectedIntent(intentId);
+        setQuestions(JSON.stringify(response));
 
-        IntentResponsesService.readAll(
-          intentId,
-          voicebotId,
-          history,
-          (intentResponse) => {
-            answers.current = intentResponse;
-            setAnswersLength(answers.current.length);
-          }
-        );
+        if (selectedIntent === null) {
+          setSelectedIntent(response[0].id);
+        }
+
+        if (response.length > 0) {
+          IntentResponsesService.readAll(
+            selectedIntent,
+            voicebotId,
+            history,
+            (intentResponse) => {
+              setAnswers(JSON.stringify(intentResponse));
+            }
+          );
+        }
       }
     );
-  }, [history, answers, questions, setAnswersLength, setQuestionsLength, setSelectedIntent, voicebotId]);
+  }, [history, answers, questions, setAnswers, setQuestions, setSelectedIntent, voicebotId, selectedIntent]);
 
   useEffect(() => {
     IntentResponsesService.readAll(
@@ -47,17 +49,10 @@ const Questions = (props) => {
       voicebotId,
       history,
       (intentResponse) => {
-        answers.current = intentResponse;
-
-        // TODO: Review better approach, I can't directly use the arrays coming from the API as state because it will
-        //    // always detect it as a change of state, to avoid using a data normalizer to be able to compare the
-        //    // data inside the arrays I created references and manually updated the length state,
-        //    // when I activate the bot the length is not changing but the data inside the arrays do.
-        setAnswersLength(null);
-        setAnswersLength(intentResponse.length);
+        setAnswers(JSON.stringify(intentResponse));
       }
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.generatedAt]);
 
   const onQuestionClick = (intentId) => {
@@ -66,9 +61,8 @@ const Questions = (props) => {
       props.voicebotId,
       history,
       (intentResponse) => {
-        answers.current = intentResponse;
-        setAnswersLength(answers.current.length);
         setSelectedIntent(intentId);
+        setAnswers(JSON.stringify(intentResponse));
       }
     );
   }
@@ -76,7 +70,7 @@ const Questions = (props) => {
   return (
     <List component="nav" aria-label="main mailbox folders">
       {
-        questions.current && questions.current.map((question) => (
+        JSON.parse(questions) && JSON.parse(questions).map((question) => (
             <ListItem
               button
               key={`${question.id}`}

@@ -55,3 +55,15 @@ module.exports.update = (voicebotId, data, history, responseCallback) => {
     errorsHelper.handleAxiosError(history, error);
   });
 }
+
+module.exports.delete = (voicebotId, history, responseCallback) => {
+  axios.delete(
+    config.apiUrl + "/api/voicebots/" + voicebotId
+  ).then((response) => {
+    responseCallback(response.data);
+  }).catch((error) => {
+    console.log("ERROR");
+    console.log(error.response);
+    errorsHelper.handleAxiosError(history, error);
+  });
+}

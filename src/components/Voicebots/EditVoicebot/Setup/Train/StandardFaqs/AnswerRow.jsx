@@ -12,22 +12,39 @@ import CloudDoneIcon from '@material-ui/icons/CloudDone';
 
 const AnswerRow = (props) => {
   const history = useHistory();
-  const [answerText, setAnswer] = useState(props.answers.current[props.answersIndex].response || "");
+  const [answerText, setAnswerText] = useState(
+    props.answer.response || ""
+  );
   const [updated, setUpdated] = useState(false);
 
   const onAnswerBlur = (event) => {
+    event.persist();
+
     IntentResponsesService.update(
       event.target.id,
       event.target.value,
       history,
       (response) => {
-        setUpdated(true)
+        // TODO: Handle response
+        console.log(response);
+        let answers = JSON.parse(props.answers).map((answer) => {
+          if (answer.id.toString() === event.target.id) {
+            answer.response = event.target.value;
+            answer.audio_id = null;
+            console.log(answer);
+            return answer;
+          } else {
+            return answer;
+          }
+        });
+        props.setAnswers(JSON.stringify(answers));
+        setUpdated(true);
       }
     );
   }
 
   const onAnswerChange = (event) => {
-    setAnswer(event.target.value);
+    setAnswerText(event.target.value);
   }
 
   return (
@@ -36,18 +53,18 @@ const AnswerRow = (props) => {
         <TextField
           multiline
           rowsMax={4}
-          id={`${props.answers.current[props.answersIndex].id}`}
+          id={`${props.answer.id}`}
           value={answerText}
           onBlur={onAnswerBlur}
           onChange={onAnswerChange}
           className="answer-text-field"
         />
       </Grid>
-      <Grid item xs={1} audio_id={props.answers.current[props.answersIndex].audio_id} updated={updated} generated_at={props.generatedAt}>
-        { props.answers.current[props.answersIndex].audio_id && !updated && <CloudDoneIcon/> }
+      <Grid item xs={1} audio_id={props.answer.audio_id} generated_at={props.generatedAt}>
+        { JSON.parse(props.answers)[props.answerIndex].audio_id && !updated && <CloudDoneIcon/> }
       </Grid>
       <Grid item xs={1}>
-        <IconButton aria-label="delete" className="delete-answer" onClick={() => {props.onRemoveAnswer(props.answers.current[props.answersIndex].id)}}>
+        <IconButton aria-label="delete" className="delete-answer" onClick={() => {props.onRemoveAnswer(props.answer.id)}}>
           <DeleteIcon />
         </IconButton>
       </Grid>
