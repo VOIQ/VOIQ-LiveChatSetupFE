@@ -41,8 +41,6 @@ const Form = () => {
             console.log(response.error);
             setBackendErrors([ response.error ]);
           } else {
-            // TODO: Check valid response
-            localStorage.setItem('voiqToken', response.auth_token);
             history.push("/voicebots");
           }
         }
