@@ -12,6 +12,7 @@ import VoicebotsService from "../../../services/VoicebotsService";
 
 import './EditVoicebot.scss';
 import Setup from "./Setup/Setup";
+import Conversations from "./Conversations/Conversations";
 
 const EditVoicebot = () => {
   let { id } = useParams();
@@ -57,9 +58,13 @@ const EditVoicebot = () => {
         <TabContext value={currentTab}>
           <TabList onChange={onTabChange} aria-label="simple tabs example">
             <Tab label="Setup" value="1" />
+            <Tab label="Conversations" value="2" />
           </TabList>
           <TabPanel value="1">
             <Setup voicebotId={id}/>
+          </TabPanel>
+          <TabPanel value="2">
+            <Conversations/>
           </TabPanel>
         </TabContext>
       </Grid>
