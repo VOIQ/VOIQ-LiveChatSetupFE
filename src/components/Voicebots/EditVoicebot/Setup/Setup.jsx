@@ -90,7 +90,7 @@ const Setup = (props) => {
           <Typography>Install</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Install voicebotId={props.voicebotId}/>
+          <Install voicebotId={props.voicebotId} voicebotAuthorizedDomain={props.voicebotAuthorizedDomain}/>
         </AccordionDetails>
       </Accordion>
       <Box display="flex" justifyContent="flex-end">

@@ -18,7 +18,7 @@ import {useHistory} from "react-router-dom";
 
 const Install = (props) => {
   const history = useHistory();
-  const [authorizedDomain, setAuthorizedDomain] = useState("");
+  const [authorizedDomain, setAuthorizedDomain] = useState(props.voicebotAuthorizedDomain);
 
   let script = `<script async id="voiq-widget-js" src="${Config.voicebotsUrl}/${Utils.voicebotHashId(props.voicebotId)}.js"></script>`;
 
