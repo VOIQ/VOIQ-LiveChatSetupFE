@@ -18,14 +18,14 @@ const EditVoicebot = () => {
   const history = useHistory();
   const [voicebotName, setVoicebotName] = useState("");
   const [currentTab, setCurrentTab] = useState("1");
-  const voicebot = useRef(null);
+  const [voicebotAuthorizedDomain, setVoicebotAuthorizedDomain] = useState("");
 
   useEffect(() => {
     VoicebotsService.read(
       id,
       history,
       (response) => {
-        voicebot.current = response;
+        setVoicebotAuthorizedDomain(response.authorized_domain);
         setVoicebotName(response.name);
       }
     );
@@ -61,7 +61,7 @@ const EditVoicebot = () => {
             <Tab label="Setup" value="1" />
           </TabList>
           <TabPanel value="1">
-            <Setup voicebotId={id} voicebotAuthorizedDomain={voicebot.current.authorized_domain}/>
+            <Setup voicebotId={id} voicebotAuthorizedDomain={voicebotAuthorizedDomain}/>
           </TabPanel>
         </TabContext>
       </Grid>
