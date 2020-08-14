@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 import Customize from "./Customize/Customize";
 import Train from "./Train/Train";
-import VoicebotResponsesService from '../../../../services/VoicebotResponsesService';
+import VoicebotResponsesService from '../../../../services/VoicebotActivationService';
 import Install from "./Install/Install";
 
 import Accordion from "@material-ui/core/Accordion";
@@ -20,7 +20,15 @@ const Setup = (props) => {
   const history = useHistory();
 
   const onActivate = () => {
-    VoicebotResponsesService.generateAll(
+    VoicebotResponsesService.activate(
+      props.voicebotId,
+      "domain",
+      history,
+      (response) => {
+        console.log(response);
+      }
+    );
+    VoicebotResponsesService.generateResponses(
       props.voicebotId,
       history,
       (response) => {
