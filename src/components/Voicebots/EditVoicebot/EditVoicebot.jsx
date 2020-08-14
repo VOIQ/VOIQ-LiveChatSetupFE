@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 
 import Grid from "@material-ui/core/Grid";
 import {useHistory, useParams} from "react-router-dom";
@@ -19,12 +19,14 @@ const EditVoicebot = () => {
   const history = useHistory();
   const [voicebotName, setVoicebotName] = useState("");
   const [currentTab, setCurrentTab] = useState("1");
+  const [voicebotAuthorizedDomain, setVoicebotAuthorizedDomain] = useState("");
 
   useEffect(() => {
     VoicebotsService.read(
       id,
       history,
       (response) => {
+        setVoicebotAuthorizedDomain(response.authorized_domain);
         setVoicebotName(response.name);
       }
     );
@@ -61,7 +63,7 @@ const EditVoicebot = () => {
             <Tab label="Conversations" value="2" />
           </TabList>
           <TabPanel value="1">
-            <Setup voicebotId={id}/>
+            <Setup voicebotId={id} voicebotAuthorizedDomain={voicebotAuthorizedDomain}/>
           </TabPanel>
           <TabPanel value="2">
             <Conversations/>
