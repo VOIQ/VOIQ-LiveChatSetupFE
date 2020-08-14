@@ -12,12 +12,5 @@ module.exports.emptyArray = (array) => {
 
 module.exports.voicebotHashId = (voicebotId) => {
   const hashids = new Hashids('voiq', 10);
-  const id = hashids.encode(1, 2, 3) // o2fXhV
-  const numbers = hashids.decode(id) // [1, 2, 3]
-  console.log(id);
-  console.log(numbers);
-  console.log("VOICEBOT ID");
-  console.log(voicebotId);
-  console.log(hashids.encode(voicebotId));
   return hashids.encode(voicebotId);
 }
