@@ -52,8 +52,6 @@ const Conversations = () => {
           <TableBody>
             {JSON.parse(conversations).map((conversation) => {
               let normalizedConversation = ConversationsHelper.normalizeConversation(conversation);
-              console.log(normalizedConversation);
-              console.log(icons[conversation.code]);
               return (
                 <TableRow key={conversation.id}>
                   <TableCell>{ icons[conversation.code] }</TableCell>
