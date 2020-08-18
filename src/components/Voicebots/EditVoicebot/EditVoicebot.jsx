@@ -66,7 +66,7 @@ const EditVoicebot = () => {
             <Setup voicebotId={id} voicebotAuthorizedDomain={voicebotAuthorizedDomain}/>
           </TabPanel>
           <TabPanel value="2">
-            <Conversations/>
+            <Conversations voicebotId={id}/>
           </TabPanel>
         </TabContext>
       </Grid>
