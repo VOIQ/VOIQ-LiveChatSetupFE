@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 import Config from '../../../../../config/voiq.json';
 import Utils from '../../../../../helpers/Utils';
@@ -34,6 +34,13 @@ const Install = (props) => {
       }
     )
   }
+
+  useEffect(
+    () => {
+      setAuthorizedDomain(props.voicebotAuthorizedDomain);
+    },
+    [props.voicebotAuthorizedDomain]
+  )
 
   const onAuthorizedDomainChange = (event) => {
     setAuthorizedDomain(event.target.value);
