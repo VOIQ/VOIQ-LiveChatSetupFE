@@ -22,13 +22,13 @@ const icons = {
   "tts_request_successful": <AdbIcon/>
 }
 
-const Conversations = () => {
+const Conversations = (props) => {
   const history = useHistory();
   const [conversations, setConversations] = useState("[]");
 
   useEffect(() => {
     VoicebotEventsService.readAll(
-      1,
+      props.voicebotId,
       history,
       (response) => {
         setConversations(JSON.stringify(response));
