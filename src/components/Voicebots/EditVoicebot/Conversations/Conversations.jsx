@@ -12,6 +12,7 @@ import AccordionSummary from "@material-ui/core/AccordionSummary";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Pagination from "@material-ui/lab/Pagination";
+import Grid from "@material-ui/core/Grid";
 
 
 const Conversations = (props) => {
@@ -38,7 +39,7 @@ const Conversations = (props) => {
   };
 
   return (
-    <Container className="conversations-container">
+    <Container className="conversations-container" >
       <Typography>Voicebot Interactions</Typography>
       {
         JSON.parse(sessions).map((session) => {
@@ -58,7 +59,9 @@ const Conversations = (props) => {
           );
         })
       }
-      <Pagination onChange={handleChange} count={pagesCount} color="primary" />
+      <Grid container spacing={3} direction="column" justify="center" alignItems="center" className="paging">
+        <Pagination onChange={handleChange} count={pagesCount} color="primary" />
+      </Grid>
     </Container>
   );
 }
