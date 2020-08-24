@@ -11,9 +11,6 @@ const ConversationPlayer = (props) => {
   const question = useRef(null);
 
   const onPlayButtonClick = (event) => {
-    console.log(props.id)
-    console.log(props.questionRecording)
-    console.log(props.answerRecording)
     if (playing) {
       answer.current.stop();
       question.current.stop();
