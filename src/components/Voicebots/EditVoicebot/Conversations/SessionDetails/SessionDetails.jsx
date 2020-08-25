@@ -2,12 +2,13 @@ import React, {useEffect, useState} from "react";
 
 import VoicebotEventsService from "../../../../../services/VoicebotEventsService";
 import './SessionDetails.scss';
+import ConversationsHelper from "../../../../../helpers/ConversationsHelper";
+import ConversationPlayer from "./ConversationPlayer";
 
 import {Typography} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import MaterialTable from "material-table";
-import ConversationsHelper from "../../../../../helpers/ConversationsHelper";
-import ConversationPlayer from "./ConversationPlayer";
+import Container from "@material-ui/core/Container";
 
 const SessionDetails = (props) => {
   const history = useHistory();
@@ -38,6 +39,7 @@ const SessionDetails = (props) => {
     let localConversations = JSON.parse(conversations)
     for (let conversation_id in localConversations) {
       let normalizedConversation = ConversationsHelper.normalizeConversation(localConversations[conversation_id]);
+      let date = new Date(normalizedConversation.created_at);
       sessionConv.push(
         {
           recording: <ConversationPlayer
@@ -47,7 +49,7 @@ const SessionDetails = (props) => {
           />,
           question: normalizedConversation.question,
           answer: normalizedConversation.answer,
-          created_at: normalizedConversation.created_at
+          created_at: date.toLocaleString('en-US', { timeZone: 'EST' }).toString()
         }
       );
     }
@@ -55,7 +57,7 @@ const SessionDetails = (props) => {
   }
 
   return (
-    <div>
+    <Container className="session-details-container">
       <Typography>Session Details</Typography>
       <MaterialTable
         options={{
@@ -65,7 +67,7 @@ const SessionDetails = (props) => {
         columns={conversationsColumns}
         data={conversationsData(conversations)}
       />
-    </div>
+    </Container>
   );
 }
 
