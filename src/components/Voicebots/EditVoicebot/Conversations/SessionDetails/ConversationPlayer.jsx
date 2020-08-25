@@ -31,7 +31,7 @@ const ConversationPlayer = (props) => {
       }
 
       question.current.on('end', () => {
-        answer.play();
+        answer.current.play();
       });
       question.current.play();
       setPlaying(true);
