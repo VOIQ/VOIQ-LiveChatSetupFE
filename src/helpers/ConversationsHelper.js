@@ -1,18 +1,23 @@
 module.exports.normalizeConversation = (beConversation) => {
-  switch (beConversation.code) {
-    case "stt_google_successful":
-      return {
-        date: beConversation.created_at,
-        recording: beConversation.details.recording_url,
-        transcription: beConversation.details.transcript
-      };
-    case "tts_request_successful":
-      return {
-        date: beConversation.created_at,
-        recording: beConversation.details.response_url,
-        transcription: beConversation.details.response_text
-      };
-    default:
-      return {};
+  let conversation = {};
+
+  for (let conversationIndex in beConversation) {
+    let conversationPart = beConversation[conversationIndex];
+    switch (conversationPart.code) {
+      case "stt_google_successful":
+        conversation["id"] = conversationPart.id;
+        conversation["created_at"] = conversationPart.created_at;
+        conversation["questionRecording"] = conversationPart.details.recording_url;
+        conversation["question"] = conversationPart.details.transcript;
+        break;
+      case "tts_request_successful":
+        conversation["answerRecording"] = conversationPart.details.response_url;
+        conversation["answer"] = conversationPart.details.response_text;
+        break;
+      default:
+        break;
+    }
   }
+
+  return conversation;
 }
