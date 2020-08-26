@@ -55,7 +55,7 @@ const Conversations = (props) => {
               >
                 <Grid container>
                   <Grid item xs={8}>
-                    <span className="session-text">Session {session.session_id}</span>
+                    <span className="session-text">Session {session.id}</span>
                     <CopyToClipboard text={session.session_id}>
                       <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
                     </CopyToClipboard>
