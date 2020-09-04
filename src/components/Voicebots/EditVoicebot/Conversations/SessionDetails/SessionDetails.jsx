@@ -21,7 +21,7 @@ const SessionDetails = (props) => {
     },
     { title: 'Question', field: 'question' },
     { title: 'Answer', field: 'answer' },
-    { title: 'Created', field: 'created_at' }
+    { title: 'Created', field: 'created_at', defaultSort: 'asc' }
   ];
 
   useEffect(() => {

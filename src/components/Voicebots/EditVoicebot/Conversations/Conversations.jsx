@@ -13,6 +13,9 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Pagination from "@material-ui/lab/Pagination";
 import Grid from "@material-ui/core/Grid";
+import IconButton from "@material-ui/core/IconButton";
+import FileCopyIcon from "@material-ui/icons/FileCopy";
+import {CopyToClipboard} from "react-copy-to-clipboard";
 
 
 const Conversations = (props) => {
@@ -50,7 +53,17 @@ const Conversations = (props) => {
                 aria-controls="customize-content"
                 id="customize-header"
               >
-                <Typography>Session {session.session_id}</Typography>
+                <Grid container>
+                  <Grid item xs={8}>
+                    <span className="session-text">Session {session.id}</span>
+                    <CopyToClipboard text={session.session_id}>
+                      <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
+                    </CopyToClipboard>
+                  </Grid>
+                  <Grid item xs={4}>
+                    { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
+                  </Grid>
+                </Grid>
               </AccordionSummary>
               <AccordionDetails>
                 <SessionDetails session={session}/>
