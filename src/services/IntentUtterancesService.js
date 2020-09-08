@@ -4,13 +4,13 @@ const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
-module.exports.create = (intentId, voicebotId, responseText, history, responseCallback) => {
+module.exports.create = (intentId, code, name, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/intent_responses",
+    config.apiUrl + "/api/utterances",
     {
       "intent_id": intentId,
-      "voicebot_id": voicebotId,
-      "response": responseText
+      "code": code,
+      "name": name
     }
   ).then((response) => {
     responseCallback(response.data);
@@ -22,9 +22,9 @@ module.exports.create = (intentId, voicebotId, responseText, history, responseCa
   });
 }
 
-module.exports.delete = (intentResponseId, history, responseCallback) => {
+module.exports.delete = (utteranceId, history, responseCallback) => {
   axios.delete(
-    config.apiUrl + "/api/intent_responses/"+intentResponseId
+    config.apiUrl + "/api/utterances/"+utteranceId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -34,9 +34,9 @@ module.exports.delete = (intentResponseId, history, responseCallback) => {
   });
 }
 
-module.exports.read = (intentResponseId, history, responseCallback) => {
+module.exports.read = (utteranceId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/intent_responses/"+intentResponseId
+    config.apiUrl + "/api/utterances/"+utteranceId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -46,13 +46,12 @@ module.exports.read = (intentResponseId, history, responseCallback) => {
   });
 }
 
-module.exports.readAll = (intentId, voicebotId, history, responseCallback) => {
+module.exports.readAll = (intentId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/intent_responses",
+    config.apiUrl + "/api/utterances",
     {
       params: {
-        intent_id: intentId,
-        voicebot_id: voicebotId
+        intent_id: intentId
       }
     }
   ).then((response) => {
@@ -64,11 +63,13 @@ module.exports.readAll = (intentId, voicebotId, history, responseCallback) => {
   });
 }
 
-module.exports.update = (intentResponseId, answer, history, responseCallback) => {
+module.exports.update = (utteranceId, intentId, code, name, history, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/intent_responses/"+intentResponseId,
+    config.apiUrl + "/api/utterances/"+utteranceId,
     {
-      response: answer
+      intent_id: intentId,
+      code: code,
+      "name": name
     }
   ).then((response) => {
     responseCallback(response.data);

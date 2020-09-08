@@ -1,6 +1,6 @@
 import React from "react";
 
-import IntentResponsesService from "../../../../../../services/IntentResponsesService";
+import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
 import AnswerRow from "./AnswerRow";
 
 import TableRow from "@material-ui/core/TableRow";
@@ -17,11 +17,11 @@ const Answers = (props) => {
   const history = useHistory();
   const answers = props.answers;
   const setAnswers = props.setAnswers;
-  const selectedIntent = props.selectedIntent;
+  const selectedUtterance = props.selectedUtterance;
 
   const addAnswer = (_event) => {
-    IntentResponsesService.create(
-      selectedIntent,
+    UtteranceResponsesService.create(
+      selectedUtterance,
       props.voicebotId,
       "",
       history,
@@ -29,14 +29,14 @@ const Answers = (props) => {
         console.log(response);
         setAnswers(JSON.stringify([
           ...JSON.parse(answers),
-          response.intent_response
+          response
         ]));
       }
     );
   }
 
   const removeAnswer = (answerId) => {
-    IntentResponsesService.delete(
+    UtteranceResponsesService.delete(
       answerId,
       history,
       (response) => {
@@ -49,6 +49,7 @@ const Answers = (props) => {
     );
   }
 
+  console.log(answers);
   return (
     <TableContainer component={Paper}>
       <Table size="small" aria-label="simple table">

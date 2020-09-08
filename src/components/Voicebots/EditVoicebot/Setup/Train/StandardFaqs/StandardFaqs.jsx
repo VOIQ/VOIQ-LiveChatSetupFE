@@ -6,13 +6,13 @@ import Typography from "@material-ui/core/Typography";
 import '../Options.scss';
 import './StandardFaqs.scss';
 
-import Questions from "./Questions";
+import Intents from "./Intents";
 import Answers from "./Answers";
 
 const StandardFaqs = (props) => {
-  const [selectedIntent, setSelectedIntent] = useState(null);
+  const [selectedUtterance, setSelectedUtterance] = useState(null);
   const [answers, setAnswers] = useState("[]");
-  const [questions, setQuestions] = useState("[]");
+  const [intents, setIntents] = useState("[]");
 
   return (
     <Grid container direction="column" spacing={2} className="option-container">
@@ -23,13 +23,13 @@ const StandardFaqs = (props) => {
         <Grid container direction="row" className="standard-faq-container">
           <Grid item xs={6} className="standard-faq-questions">
             <Typography>Questions</Typography>
-            <Questions
+            <Intents
               setAnswers={setAnswers}
               answers={answers}
-              setQuestions={setQuestions}
-              questions={questions}
-              setSelectedIntent={setSelectedIntent}
-              selectedIntent={selectedIntent}
+              setIntents={setIntents}
+              intents={intents}
+              setSelectedUtterance={setSelectedUtterance}
+              selectedUtterance={selectedUtterance}
               voicebotId={props.voicebotId}
               generatedAt={props.generatedAt}
             />
@@ -39,7 +39,7 @@ const StandardFaqs = (props) => {
             <Answers
               setAnswers={setAnswers}
               answers={answers}
-              selectedIntent={selectedIntent}
+              selectedUtterance={selectedUtterance}
               voicebotId={props.voicebotId}
             />
           </Grid>

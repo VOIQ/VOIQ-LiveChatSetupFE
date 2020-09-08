@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import IntentResponsesService from "../../../../../../services/IntentResponsesService";
+import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
 import './AnswerRow.scss';
 
 import TextField from "@material-ui/core/TextField";
@@ -20,7 +20,7 @@ const AnswerRow = (props) => {
   const onAnswerBlur = (event) => {
     event.persist();
 
-    IntentResponsesService.update(
+    UtteranceResponsesService.update(
       event.target.id,
       event.target.value,
       history,
