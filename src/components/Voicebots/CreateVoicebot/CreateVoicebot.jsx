@@ -22,9 +22,7 @@ const CreateVoicebot = () => {
         values['voicebot_name'],
         history,
         (response) => {
-          if (response.status && response.status === 'OK') {
-            history.push('/voicebots');
-          }
+          history.push('/voicebots');
         }
       );
     } catch (e) {

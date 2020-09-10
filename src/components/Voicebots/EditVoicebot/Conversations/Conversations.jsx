@@ -54,11 +54,14 @@ const Conversations = (props) => {
                 id="customize-header"
               >
                 <Grid container>
-                  <Grid item xs={8}>
+                  <Grid item xs={4}>
                     <span className="session-text">Session {session.id}</span>
                     <CopyToClipboard text={session.session_id}>
                       <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
                     </CopyToClipboard>
+                  </Grid>
+                  <Grid item xs={4}>
+                    { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography> }
                   </Grid>
                   <Grid item xs={4}>
                     { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
