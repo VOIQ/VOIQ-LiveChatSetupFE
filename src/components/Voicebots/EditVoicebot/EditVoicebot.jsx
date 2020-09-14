@@ -26,6 +26,7 @@ const EditVoicebot = () => {
       id,
       history,
       (response) => {
+        console.log(response)
         setVoicebotAuthorizedDomain(response.authorized_domain);
         setVoicebotName(response.name);
       }

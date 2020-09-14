@@ -52,7 +52,7 @@ const Install = (props) => {
       <Typography>Input your website's domain so we can tie it to the Voicebot. Please use this format: acme.com</Typography>
       <TextField
         id="authorized-domain"
-        value={authorizedDomain}
+        value={authorizedDomain || ""}
         onBlur={onAuthorizedDomainBlur}
         onChange={onAuthorizedDomainChange}
         label="Authorized Domain"

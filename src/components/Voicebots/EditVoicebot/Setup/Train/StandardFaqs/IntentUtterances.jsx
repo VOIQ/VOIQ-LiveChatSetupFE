@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 
-import * as IntentUtterancesService from "../../../../../../services/IntentUtterancesService";
+import * as UtterancesService from "../../../../../../services/UtterancesService";
 import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
 import './IntentUtterances.scss';
 
@@ -18,26 +18,11 @@ const IntentUtterances = (props) => {
   const setAnswers = props.setAnswers;
 
   useEffect(() => {
-    IntentUtterancesService.readAll(
+    UtterancesService.readAll(
       props.intentId,
       history,
       (response) => {
         setUtterances(JSON.stringify(response));
-
-        if (response.length > 0) {
-          if (selectedUtterance === null) {
-            setSelectedUtterance(response[0].id);
-          }
-
-          UtteranceResponsesService.readAll(
-            selectedUtterance,
-            voicebotId,
-            history,
-            (intentResponse) => {
-              setAnswers(JSON.stringify(intentResponse));
-            }
-          );
-        }
       }
     );
   }, [history, props, selectedUtterance, setAnswers, setSelectedUtterance, voicebotId]);

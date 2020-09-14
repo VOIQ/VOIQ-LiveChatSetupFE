@@ -49,7 +49,6 @@ const Answers = (props) => {
     );
   }
 
-  console.log(answers);
   return (
     <TableContainer component={Paper}>
       <Table size="small" aria-label="simple table">

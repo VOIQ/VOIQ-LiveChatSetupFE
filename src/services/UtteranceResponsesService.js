@@ -4,22 +4,24 @@ const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
-module.exports.create = (intentUtteranceId, voicebotId, responseText, history, responseCallback) => {
-  axios.post(
-    config.apiUrl + "/api/utterance_responses",
-    {
-      "intent_utterance_id": intentUtteranceId,
-      "voicebot_id": voicebotId,
-      "response": responseText
-    }
-  ).then((response) => {
-    responseCallback(response.data);
-  }).catch((error) => {
-    console.log("ERROR");
-    console.log(error);
-    console.log(error.response);
-    errorsHelper.handleAxiosError(history, error);
-  });
+module.exports.create = (utteranceId, voicebotId, responseText, history, responseCallback) => {
+  if(utteranceId) {
+    axios.post(
+      config.apiUrl + "/api/utterance_responses",
+      {
+        "utterance_id": utteranceId,
+        "voicebot_id": voicebotId,
+        "response": responseText
+      }
+    ).then((response) => {
+      responseCallback(response.data);
+    }).catch((error) => {
+      console.log("ERROR");
+      console.log(error);
+      console.log(error.response);
+      errorsHelper.handleAxiosError(history, error);
+    });
+  }
 }
 
 module.exports.delete = (intentResponseId, history, responseCallback) => {
@@ -46,22 +48,24 @@ module.exports.read = (intentResponseId, history, responseCallback) => {
   });
 }
 
-module.exports.readAll = (intentUtteranceId, voicebotId, history, responseCallback) => {
-  axios.get(
-    config.apiUrl + "/api/utterance_responses",
-    {
-      params: {
-        intent_utterance_id: intentUtteranceId,
-        voicebot_id: voicebotId
+module.exports.readAll = (utteranceId, voicebotId, history, responseCallback) => {
+  if(utteranceId) {
+    axios.get(
+      config.apiUrl + "/api/utterance_responses",
+      {
+        params: {
+          utterance_id: utteranceId,
+          voicebot_id: voicebotId
+        }
       }
-    }
-  ).then((response) => {
-    responseCallback(response.data);
-  }).catch((error) => {
-    console.log("ERROR");
-    console.log(error.response);
-    errorsHelper.handleAxiosError(history, error);
-  });
+    ).then((response) => {
+      responseCallback(response.data);
+    }).catch((error) => {
+      console.log("ERROR");
+      console.log(error.response);
+      errorsHelper.handleAxiosError(history, error);
+    });
+  }
 }
 
 module.exports.update = (intentResponseId, answer, history, responseCallback) => {
