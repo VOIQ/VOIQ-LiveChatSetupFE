@@ -40,6 +40,12 @@ const SessionDetails = (props) => {
     for (let conversationId in localConversations) {
       let normalizedConversation = ConversationsHelper.normalizeConversation(localConversations[conversationId]);
       let date = new Date(normalizedConversation.created_at);
+
+      let answerText = "";
+      normalizedConversation.answersData.forEach((answer, _index) => {
+        answerText += answer.response_text + " - ";
+      });
+
       sessionConv.push(
         {
           recording: <ConversationPlayer
@@ -48,7 +54,7 @@ const SessionDetails = (props) => {
             answersData={normalizedConversation.answersData}
           />,
           question: normalizedConversation.question,
-          answer: normalizedConversation.answer,
+          answer: answerText,
           created_at: date.toLocaleString('en-US', { timeZone: 'EST' }).toString()
         }
       );
