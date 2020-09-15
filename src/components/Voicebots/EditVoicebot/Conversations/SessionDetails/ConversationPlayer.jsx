@@ -44,7 +44,7 @@ const ConversationPlayer = (props) => {
       });
       question.current.play();
 
-      let lastAnswer = arr.slice(-1).pop();
+      let lastAnswer = answers.current.slice(-1).pop();
       lastAnswer.current.on('end', () => {
         setPlaying(false);
       });
