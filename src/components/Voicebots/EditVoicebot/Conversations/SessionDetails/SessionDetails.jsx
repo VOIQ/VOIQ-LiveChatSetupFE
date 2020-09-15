@@ -37,15 +37,15 @@ const SessionDetails = (props) => {
   const conversationsData = (conversations) => {
     let sessionConv = [];
     let localConversations = JSON.parse(conversations)
-    for (let conversation_id in localConversations) {
-      let normalizedConversation = ConversationsHelper.normalizeConversation(localConversations[conversation_id]);
+    for (let conversationId in localConversations) {
+      let normalizedConversation = ConversationsHelper.normalizeConversation(localConversations[conversationId]);
       let date = new Date(normalizedConversation.created_at);
       sessionConv.push(
         {
           recording: <ConversationPlayer
             id={normalizedConversation.id}
             questionRecording={normalizedConversation.questionRecording}
-            answerRecording={normalizedConversation.answerRecording}
+            answersData={normalizedConversation.answersData}
           />,
           question: normalizedConversation.question,
           answer: normalizedConversation.answer,

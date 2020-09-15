@@ -7,19 +7,26 @@ import {Howl} from 'howler';
 
 const ConversationPlayer = (props) => {
   const [playing, setPlaying] = useState(false);
-  const answer = useRef(null);
+  const answers = useRef(null);
   const question = useRef(null);
 
   const onPlayButtonClick = (event) => {
     if (playing) {
-      answer.current.stop();
+      answers.current.forEach((answer, _index) => {
+        answer.stop();
+      });
       question.current.stop();
       setPlaying(false);
     } else {
-      if(!answer.current) {
-        answer.current = new Howl({
-          src: [props.answerRecording],
-          html5: true
+      if(!answers.current) {
+        answers.current = []
+        props.answersData.forEach((answer, _index) => {
+          answers.current.push(
+            new Howl({
+              src: [answer.responseUrl],
+              html5: true
+            })
+          )
         });
       }
 
@@ -31,11 +38,14 @@ const ConversationPlayer = (props) => {
       }
 
       question.current.on('end', () => {
-        answer.current.play();
+        answers.current.forEach((answer, _index) => {
+          answer.play();
+        });
       });
       question.current.play();
 
-      answer.current.on('end', () => {
+      let lastAnswer = arr.slice(-1).pop();
+      lastAnswer.current.on('end', () => {
         setPlaying(false);
       });
 

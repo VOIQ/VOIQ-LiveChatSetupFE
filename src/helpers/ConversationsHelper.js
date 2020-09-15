@@ -11,8 +11,7 @@ module.exports.normalizeConversation = (beConversation) => {
         conversation["question"] = conversationPart.details.transcript;
         break;
       case "tts_request_successful":
-        conversation["answerRecording"] = conversationPart.details.response_url;
-        conversation["answer"] = conversationPart.details.response_text;
+        conversation["answersData"] = conversationPart.details.answers;
         break;
       default:
         break;
