@@ -37,14 +37,17 @@ const SessionDetails = (props) => {
   const conversationsData = (conversations) => {
     let sessionConv = [];
     let localConversations = JSON.parse(conversations)
+
     for (let conversationId in localConversations) {
       let normalizedConversation = ConversationsHelper.normalizeConversation(localConversations[conversationId]);
       let date = new Date(normalizedConversation.created_at);
 
       let answerText = "";
-      normalizedConversation.answersData.forEach((answer, _index) => {
-        answerText += answer.response_text + " - ";
-      });
+      if (normalizedConversation.answersData) {
+        normalizedConversation.answersData.forEach((answer, _index) => {
+          answerText += answer.response_text + " - ";
+        });
+      }
 
       sessionConv.push(
         {
