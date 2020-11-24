@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 
 import VoicebotEventsService from '../../../../services/VoicebotEventsService';
 import './Conversations.scss';
-
 import {Typography} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import {useHistory} from "react-router-dom";
@@ -46,6 +45,8 @@ const Conversations = (props) => {
       <Typography>Voicebot Interactions</Typography>
       {
         JSON.parse(sessions).map((session) => {
+          //IF THERE IS INFO ABOUT THE IP ADRESS
+          if(session.session_ip){
           return (
             <Accordion key={session.id}>
               <AccordionSummary
@@ -54,17 +55,23 @@ const Conversations = (props) => {
                 id="customize-header"
               >
                 <Grid container>
-                  <Grid item xs={4}>
+                  <Grid item xs={2}>
                     <span className="session-text">Session {session.id}</span>
                     <CopyToClipboard text={session.session_id}>
                       <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
                     </CopyToClipboard>
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={2}>
                     { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography> }
                   </Grid>
-                  <Grid item xs={4}>
+                  <Grid item xs={2}>
                     { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
+                  </Grid>
+                  <Grid item xs={2}>
+                  <img class="country-icon" src={"/flags/"+session.country+".png"} alt="" />                 
+                  </Grid>
+                  <Grid item xs={2}>
+                    {session.session_ip}
                   </Grid>
                 </Grid>
               </AccordionSummary>
@@ -73,9 +80,47 @@ const Conversations = (props) => {
               </AccordionDetails>
             </Accordion>
           );
+          }else{
+            //IF THERE IS NO IP ADRESS INFO
+            return (
+              <Accordion key={session.id}>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon/>}
+                  aria-controls="customize-content"
+                  id="customize-header"
+                >
+                  <Grid container>
+                    <Grid item xs={2}>
+                      <span className="session-text">Session {session.id}</span>
+                      <CopyToClipboard text={session.session_id}>
+                        <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
+                      </CopyToClipboard>
+                    </Grid>
+                    <Grid item xs={2}>
+                      { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography> }
+                    </Grid>
+                    <Grid item xs={2}>
+                      { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
+                    </Grid>
+                    <Grid item xs={2}>
+                                    
+                    </Grid>
+                    <Grid item xs={2}>
+                      
+                    </Grid>
+                  </Grid>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <SessionDetails session={session}/>
+                </AccordionDetails>
+              </Accordion>
+            );
+          }
+        
+        
         })
       }
-      <Grid container spacing={3} direction="column" justify="center" alignItems="center" className="paging">
+      <Grid container spacing={5} direction="column" justify="center" alignItems="center" className="paging">
         <Pagination onChange={handleChange} count={pagesCount} color="primary" />
       </Grid>
     </Container>
