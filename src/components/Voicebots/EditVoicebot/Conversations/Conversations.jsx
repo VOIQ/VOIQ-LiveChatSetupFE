@@ -15,6 +15,7 @@ import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import {CopyToClipboard} from "react-copy-to-clipboard";
+import ReactCountryFlag from "react-country-flag";
 
 
 const Conversations = (props) => {
@@ -22,7 +23,10 @@ const Conversations = (props) => {
   const [sessions, setSessions] = useState("[]");
   const [sessionsPage, setSessionsPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
-
+  const flagStyle = {
+     width: '45px',
+     height: '35px'
+  };
   useEffect(() => {
     VoicebotEventsService.readVoicebotSessions(
       props.voicebotId,
@@ -40,13 +44,12 @@ const Conversations = (props) => {
     setSessionsPage(newPage);
   };
 
+
   return (
     <Container className="conversations-container" >
       <Typography>Voicebot Interactions</Typography>
       {
         JSON.parse(sessions).map((session) => {
-          //IF THERE IS INFO ABOUT THE IP ADRESS
-          if(session.session_ip){
           return (
             <Accordion key={session.id}>
               <AccordionSummary
@@ -67,8 +70,8 @@ const Conversations = (props) => {
                   <Grid item xs={2}>
                     { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
                   </Grid>
-                  <Grid item xs={2}>
-                  <img class="country-icon" src={"/flags/"+session.country+".png"} alt="" />                 
+                   <Grid item xs={2}>
+                    { session.session_ip &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }          
                   </Grid>
                   <Grid item xs={2}>
                     {session.session_ip}
@@ -80,43 +83,6 @@ const Conversations = (props) => {
               </AccordionDetails>
             </Accordion>
           );
-          }else{
-            //IF THERE IS NO IP ADRESS INFO
-            return (
-              <Accordion key={session.id}>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon/>}
-                  aria-controls="customize-content"
-                  id="customize-header"
-                >
-                  <Grid container>
-                    <Grid item xs={2}>
-                      <span className="session-text">Session {session.id}</span>
-                      <CopyToClipboard text={session.session_id}>
-                        <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
-                      </CopyToClipboard>
-                    </Grid>
-                    <Grid item xs={2}>
-                      { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography> }
-                    </Grid>
-                    <Grid item xs={2}>
-                      { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
-                    </Grid>
-                    <Grid item xs={2}>
-                                    
-                    </Grid>
-                    <Grid item xs={2}>
-                      
-                    </Grid>
-                  </Grid>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <SessionDetails session={session}/>
-                </AccordionDetails>
-              </Accordion>
-            );
-          }
-        
         
         })
       }
@@ -128,3 +94,5 @@ const Conversations = (props) => {
 }
 
 export default Conversations;
+
+                   
