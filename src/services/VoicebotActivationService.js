@@ -19,6 +19,21 @@ module.exports.generateResponses = (voicebotId, history, responseCallback) => {
   });
 }
 
+module.exports.generateActions = (voicebotId, history, responseCallback) => {
+  axios.post(
+    config.apiUrl + "/api/voicebot_activation/actions",
+    {
+      "voicebot_id": voicebotId
+    }
+  ).then((response) => {
+    responseCallback(response.data);
+  }).catch((error) => {
+    console.log("ERROR");
+    console.log(error.response);
+    errorsHelper.handleAxiosError(history, error);
+  });
+}
+
 module.exports.activate = (voicebotId, authorizedDomain, history, responseCallback) => {
   axios.post(
     config.apiUrl + "/api/voicebot_activation",

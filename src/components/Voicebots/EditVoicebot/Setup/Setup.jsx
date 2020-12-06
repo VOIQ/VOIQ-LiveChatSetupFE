@@ -36,6 +36,14 @@ const Setup = (props) => {
         updateGenerateProgress();
       }
     );
+    VoicebotResponsesService.generateActions(
+      props.voicebotId,
+      history,
+      (response) => {
+        setButtonDisabled(true);
+        updateGenerateProgress();
+      }
+    );
   }
 
   const updateGenerateProgress = () => {
