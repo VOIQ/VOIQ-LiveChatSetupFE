@@ -71,7 +71,7 @@ const Conversations = (props) => {
                     { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
                   </Grid>
                    <Grid item xs={2}>
-                    { session.session_ip &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }          
+                    { session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }          
                   </Grid>
                   <Grid item xs={2}>
                     {session.session_ip}
