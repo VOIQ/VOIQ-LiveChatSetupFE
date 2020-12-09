@@ -17,7 +17,6 @@ import FileCopyIcon from "@material-ui/icons/FileCopy";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import ReactCountryFlag from "react-country-flag";
 
-
 const Conversations = (props) => {
   const history = useHistory();
   const [sessions, setSessions] = useState("[]");
@@ -43,7 +42,6 @@ const Conversations = (props) => {
   const handleChange = (event, newPage) => {
     setSessionsPage(newPage);
   };
-
 
   return (
     <Container className="conversations-container" >
@@ -94,5 +92,3 @@ const Conversations = (props) => {
 }
 
 export default Conversations;
-
-                   
