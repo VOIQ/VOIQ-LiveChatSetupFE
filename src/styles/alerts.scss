@@ -1,0 +1,13 @@
+@import './colors';
+
+.voiq-info-alert {
+    &.MuiAlert-standardInfo {
+        color: black !important;
+        background-color: $voiq-translucid-blue !important;
+        margin-top: 10px;
+    }
+        
+    &.MuiAlert-standardInfo .MuiAlert-icon {
+        color: $voiq-blue !important;
+    }
+}

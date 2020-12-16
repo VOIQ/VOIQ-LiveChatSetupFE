@@ -13,10 +13,12 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Button from "@material-ui/core/Button";
 import {Box} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
+import Alert from '@material-ui/lab/Alert';
 
 const Setup = (props) => {
   const [generatedAt, setGeneratedAt] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
+  const [showActivationAlert, setActivationAlert] = useState(false);
   const history = useHistory();
 
   const onActivate = () => {
@@ -25,23 +27,27 @@ const Setup = (props) => {
       "domain",
       history,
       (response) => {
-        console.log(response);
-      }
-    );
-    VoicebotResponsesService.generateResponses(
-      props.voicebotId,
-      history,
-      (response) => {
-        setButtonDisabled(true);
-        updateGenerateProgress();
-      }
-    );
-    VoicebotResponsesService.generateActions(
-      props.voicebotId,
-      history,
-      (response) => {
-        setButtonDisabled(true);
-        updateGenerateProgress();
+        if (response.status === 200) {
+          VoicebotResponsesService.generateResponses(
+            props.voicebotId,
+            history,
+            (response) => {
+              setButtonDisabled(true);
+              updateGenerateProgress();
+            }
+          );
+          VoicebotResponsesService.generateActions(
+            props.voicebotId,
+            history,
+            (response) => {
+              setButtonDisabled(true);
+              updateGenerateProgress();
+            }
+          );
+        } else if (response.status === 226) {
+          console.log("Undergoing process");
+          setActivationAlert(true);
+        }
       }
     );
   }
@@ -54,6 +60,7 @@ const Setup = (props) => {
         if (response.percentage === 100) {
           setGeneratedAt(Date.now().toString());
           setButtonDisabled(false);
+          console.log("Process finished");
         } else {
           setTimeout(function(){
             updateGenerateProgress();
@@ -106,6 +113,7 @@ const Setup = (props) => {
           Activate
         </Button>
       </Box>
+      { showActivationAlert && (<Alert className="voiq-info-alert" onClose={() => {setActivationAlert(false)}} severity="info">The activation process is already undergoing</Alert>)}
     </div>
   );
 }

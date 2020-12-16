@@ -42,7 +42,7 @@ module.exports.activate = (voicebotId, authorizedDomain, history, responseCallba
       "authorized_domain": authorizedDomain
     }
   ).then((response) => {
-    responseCallback(response.data);
+    responseCallback(response);
   }).catch((error) => {
     console.log("ERROR");
     console.log(error.response);
