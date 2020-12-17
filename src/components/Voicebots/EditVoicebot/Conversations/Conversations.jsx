@@ -14,6 +14,7 @@ import Pagination from "@material-ui/lab/Pagination";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import InfoIcon from '@material-ui/icons/Info';
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import ReactCountryFlag from "react-country-flag";
 import Tooltip from '@material-ui/core/Tooltip';
@@ -24,9 +25,8 @@ const Conversations = (props) => {
   const [sessionsPage, setSessionsPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
   const flagStyle = {
-     width: '20px',
-     height: '15px',
-     margin: '5px'
+     width: '30px',
+     height: '25px',
   };
   useEffect(() => {
     VoicebotEventsService.readVoicebotSessions(
@@ -58,28 +58,28 @@ const Conversations = (props) => {
                 id="customize-header"
               >
                 <Grid container>
-                  <Grid item xs={4}>
+                  <Grid item xs={2}>
                     <span className="session-text">Session {session.id}</span>
                     <CopyToClipboard text={session.session_id}>
                       <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
                     </CopyToClipboard>
                   </Grid>
-                  { session.country || session.session_ip? 
+                  <Grid item xs={3}>
+                    { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography>} 
+                  </Grid>
+                  <Grid item xs={1}>
                     <Tooltip placement="bottom-start" title={
                                                       <React.Fragment>
-                                                        { session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }{session.session_ip}
+                                                        {session.session_ip}
                                                       </React.Fragment>}>
-                      <Grid item xs={4}>
-                        { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography> } 
-                      </Grid>
+                      <InfoIcon color="action"/>
                     </Tooltip> 
-                    : 
-                    <Grid item xs={4}>
-                      { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography> } 
-                    </Grid>
-                  }
+                  </Grid>  
                   <Grid item xs={4}>
                     { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
+                  </Grid>
+                  <Grid item xs={2}>
+                    { session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }
                   </Grid>
                 </Grid>
               </AccordionSummary>
