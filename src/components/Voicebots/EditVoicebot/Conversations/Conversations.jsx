@@ -64,7 +64,7 @@ const Conversations = (props) => {
                       <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
                     </CopyToClipboard>
                   </Grid>
-                  {session.country || session.session_ip? 
+                  { session.country || session.session_ip? 
                     <Tooltip placement="bottom-start" title={
                                                       <React.Fragment>
                                                         { session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }{session.session_ip}
