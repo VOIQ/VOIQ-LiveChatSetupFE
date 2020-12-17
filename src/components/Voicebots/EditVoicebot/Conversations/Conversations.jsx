@@ -53,7 +53,7 @@ const Conversations = (props) => {
           return (
             <Accordion key={session.id}>
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon/>}
+                expandIcon={<ExpandMoreIcon />}
                 aria-controls="customize-content"
                 id="customize-header"
               >
@@ -61,30 +61,34 @@ const Conversations = (props) => {
                   <Grid item xs={2}>
                     <span className="session-text">Session {session.id}</span>
                     <CopyToClipboard text={session.session_id}>
-                      <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
+                      <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon /></IconButton>
                     </CopyToClipboard>
                   </Grid>
                   <Grid item xs={3}>
-                    { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography>} 
+                    {session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography>} 
                   </Grid>
                   <Grid item xs={1}>
-                    <Tooltip placement="bottom-start" title={
-                                                      <React.Fragment>
-                                                        {session.session_ip}
-                                                      </React.Fragment>}>
-                      <InfoIcon color="action"/>
+                    <Tooltip 
+                      placement="bottom-start" 
+                      title={
+                        <React.Fragment>
+                          {session.session_ip}
+                        </React.Fragment>
+                      }
+                    >
+                      <InfoIcon color="action" />
                     </Tooltip> 
                   </Grid>  
                   <Grid item xs={4}>
-                    { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
+                    {session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio>}
                   </Grid>
                   <Grid item xs={2}>
-                    { session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }
+                    {session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} />}
                   </Grid>
                 </Grid>
               </AccordionSummary>
               <AccordionDetails>
-                <SessionDetails session={session}/>
+                <SessionDetails session={session} />
               </AccordionDetails>
             </Accordion>
           );
