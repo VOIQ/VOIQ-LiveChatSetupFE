@@ -64,7 +64,7 @@ const Conversations = (props) => {
                       <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon /></IconButton>
                     </CopyToClipboard>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={2}>
                     {session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography>} 
                   </Grid>
                   <Grid item xs={1}>
@@ -79,11 +79,14 @@ const Conversations = (props) => {
                       <InfoIcon color="action" />
                     </Tooltip> 
                   </Grid>  
-                  <Grid item xs={4}>
+                  <Grid item xs={3}>
                     {session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio>}
                   </Grid>
+                  <Grid item xs={1}>
+                    {session.country_code &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country_code} />}
+                  </Grid>
                   <Grid item xs={2}>
-                    {session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} />}
+                    {session.country && <Typography>{session.city},{session.country}</Typography>}
                   </Grid>
                 </Grid>
               </AccordionSummary>
