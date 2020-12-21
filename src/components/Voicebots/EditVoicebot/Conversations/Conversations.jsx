@@ -14,8 +14,10 @@ import Pagination from "@material-ui/lab/Pagination";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
+import InfoIcon from '@material-ui/icons/Info';
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import ReactCountryFlag from "react-country-flag";
+import Tooltip from '@material-ui/core/Tooltip';
 
 const Conversations = (props) => {
   const history = useHistory();
@@ -23,8 +25,8 @@ const Conversations = (props) => {
   const [sessionsPage, setSessionsPage] = useState(1);
   const [pagesCount, setPagesCount] = useState(1);
   const flagStyle = {
-     width: '45px',
-     height: '35px'
+     width: '30px',
+     height: '25px',
   };
   useEffect(() => {
     VoicebotEventsService.readVoicebotSessions(
@@ -51,7 +53,7 @@ const Conversations = (props) => {
           return (
             <Accordion key={session.id}>
               <AccordionSummary
-                expandIcon={<ExpandMoreIcon/>}
+                expandIcon={<ExpandMoreIcon />}
                 aria-controls="customize-content"
                 id="customize-header"
               >
@@ -59,25 +61,37 @@ const Conversations = (props) => {
                   <Grid item xs={2}>
                     <span className="session-text">Session {session.id}</span>
                     <CopyToClipboard text={session.session_id}>
-                      <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon/></IconButton>
+                      <IconButton className="copy-session-button" onClick={(event) => { event.stopPropagation() }}><FileCopyIcon /></IconButton>
                     </CopyToClipboard>
                   </Grid>
                   <Grid item xs={2}>
-                    { session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography> }
+                    {session.voicebot_user && <Typography>{session.voicebot_user.name} - {session.voicebot_user.email}</Typography>} 
+                  </Grid>
+                  <Grid item xs={1}>
+                    <Tooltip 
+                      placement="bottom-start" 
+                      title={
+                        <React.Fragment>
+                          {session.session_ip}
+                        </React.Fragment>
+                      }
+                    >
+                      <InfoIcon color="action" />
+                    </Tooltip> 
+                  </Grid>  
+                  <Grid item xs={3}>
+                    {session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio>}
+                  </Grid>
+                  <Grid item xs={1}>
+                    {session.country_code &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country_code} />}
                   </Grid>
                   <Grid item xs={2}>
-                    { session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio> }
-                  </Grid>
-                   <Grid item xs={2}>
-                    { session.country &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country} /> }          
-                  </Grid>
-                  <Grid item xs={2}>
-                    {session.session_ip}
+                    {session.country && <Typography>{session.city},{session.country}</Typography>}
                   </Grid>
                 </Grid>
               </AccordionSummary>
               <AccordionDetails>
-                <SessionDetails session={session}/>
+                <SessionDetails session={session} />
               </AccordionDetails>
             </Accordion>
           );
