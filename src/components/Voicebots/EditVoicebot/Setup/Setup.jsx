@@ -81,7 +81,13 @@ const Setup = (props) => {
           <Typography>Customize</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Customize voicebotId={props.voicebotId}/>
+          <Customize 
+            voicebotId={props.voicebotId}
+            setKnownVisitorMessage={props.setKnownVisitorMessage}
+            knownVisitorMessage={props.knownVisitorMessage}
+            setInstructions={props.setInstructions}
+            instructions={props.instructions}
+          />
         </AccordionDetails>
       </Accordion>
       <Accordion>

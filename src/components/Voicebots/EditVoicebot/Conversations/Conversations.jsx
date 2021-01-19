@@ -79,14 +79,14 @@ const Conversations = (props) => {
                       <InfoIcon color="action" />
                     </Tooltip> 
                   </Grid>  
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     {session.recording_url && <audio className="session-player" controls><source src={session.recording_url} type="audio/mp3"/></audio>}
                   </Grid>
                   <Grid item xs={1}>
                     {session.country_code &&  <ReactCountryFlag svg style={flagStyle} countryCode={session.country_code} />}
                   </Grid>
                   <Grid item xs={2}>
-                    {session.country && <Typography>{session.city},{session.country}</Typography>}
+                    {session.country && <Typography>{session.city}, {session.country}</Typography>}
                   </Grid>
                 </Grid>
               </AccordionSummary>

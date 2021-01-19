@@ -1,22 +1,13 @@
-import React from "react";
+import React from 'react';
+
+import CloudDoneIcon from '@material-ui/icons/CloudDone';
+import ItemTable from "../../../../../Utils/ItemTable"
+import {useHistory} from "react-router-dom";
 
 import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
-import AnswerRow from "./AnswerRow";
-
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import Paper from "@material-ui/core/Paper";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import ListItem from "@material-ui/core/ListItem";
-import AddIcon from "@material-ui/icons/Add";
-import {useHistory} from "react-router-dom";
 
 const Answers = (props) => {
   const history = useHistory();
-  const answers = props.answers;
-  const setAnswers = props.setAnswers;
   const selectedUtterance = props.selectedUtterance;
 
   const addAnswer = (_event) => {
@@ -26,9 +17,9 @@ const Answers = (props) => {
       "",
       history,
       (response) => {
-        console.log(response);
-        setAnswers(JSON.stringify([
-          ...JSON.parse(answers),
+        response.should_show_optional_icon = false;
+        props.setAnswers(JSON.stringify([
+          ...JSON.parse(props.answers),
           response
         ]));
       }
@@ -40,45 +31,56 @@ const Answers = (props) => {
       answerId,
       history,
       (response) => {
-        let answersJson = JSON.parse(answers);
+        let answersJson = JSON.parse(props.answers);
         answersJson = answersJson.filter((answer) => {
           return answer.id !== answerId;
         });
-        setAnswers(JSON.stringify(answersJson));
+        props.setAnswers(JSON.stringify(answersJson));
       }
     );
   }
 
-  return (
-    <TableContainer component={Paper}>
-      <Table size="small" aria-label="simple table">
-        <TableBody>
-          {
-            JSON.parse(answers) && JSON.parse(answers).map((answer, index) => (
-              <TableRow key={answer.id}>
-                <TableCell component="th" scope="row">
-                  <AnswerRow
-                    answer={answer}
-                    answers={answers}
-                    answerIndex={index}
-                    setAnswers={setAnswers}
-                    onRemoveAnswer={removeAnswer}
-                  />
-                </TableCell>
-              </TableRow>
-            ))
+  const onAnswerBlur = (event) => {
+    event.persist();
+
+    UtteranceResponsesService.update(
+      event.target.id.split('-')[1],
+      event.target.value,
+      history,
+      (response) => {
+        let answers = JSON.parse(props.answers).map((answer) => {
+          if (answer.id.toString() === event.target.id) {
+            answer.response = event.target.value;
+            answer.audio_id = null;
+            return answer;
+          } else {
+            return answer;
           }
-        </TableBody>
-      </Table>
-      <ListItem
-        button
-        alignItems="center"
-        className="add-answer"
-        onClick={addAnswer}
-      >
-        <AddIcon/>
-      </ListItem>
-    </TableContainer>
+        });
+        props.setAnswers(JSON.stringify(answers));
+      }
+    );
+  }
+
+  function cloudIcon() {
+    return (
+      <CloudDoneIcon />
+    );
+  }
+
+  return (
+    <ItemTable
+        attributeName='response'
+        voicebotId={props.voicebotId}
+        itemList={props.answers}
+        setList={props.setAnswers}
+        onRemoveItem={removeAnswer}
+        onItemBlur={onAnswerBlur}
+        addItem={addAnswer}
+        multiline={true}
+        rowsMax={4}
+        optionalIcon={cloudIcon}
+      />
   );
 }
 

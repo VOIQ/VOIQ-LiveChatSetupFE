@@ -21,7 +21,7 @@ module.exports.create = (voicebot_name, history, responseCallback) => {
 
 module.exports.read = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voicebots/"+voicebotId
+    config.apiUrl + "/api/voicebots/" + voicebotId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -45,7 +45,7 @@ module.exports.readAll = (history, responseCallback) => {
 
 module.exports.update = (voicebotId, data, history, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/voicebots/"+voicebotId,
+    config.apiUrl + "/api/voicebots/" + voicebotId,
     data
   ).then((response) => {
     responseCallback(response.data);

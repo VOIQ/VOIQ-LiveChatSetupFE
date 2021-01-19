@@ -4,38 +4,11 @@ const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
-module.exports.create = (data, history, responseCallback) => {
+module.exports.create = (voicebotId, question, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/intents",
-    data
-  ).then((response) => {
-    responseCallback(response.data);
-  }).catch((error) => {
-    console.log("ERROR");
-    console.log(error.response);
-    errorsHelper.handleAxiosError(history, error);
-  });
-}
-
-module.exports.read = (intentId, history, responseCallback) => {
-  axios.get(
-    config.apiUrl + "/api/intents/" + intentId
-  ).then((response) => {
-    responseCallback(response.data);
-  }).catch((error) => {
-    console.log("ERROR");
-    console.log(error.response);
-    errorsHelper.handleAxiosError(history, error);
-  });
-}
-
-module.exports.readAll = (voicebotId, history, responseCallback) => {
-  axios.get(
-    config.apiUrl + "/api/intents",
+    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions",
     {
-      params: {
-        voicebot_id: voicebotId
-      }
+      "question": question
     }
   ).then((response) => {
     responseCallback(response.data);
@@ -47,15 +20,39 @@ module.exports.readAll = (voicebotId, history, responseCallback) => {
   });
 }
 
-module.exports.update = (intentId, data, history, responseCallback) => {
-  axios.put(
-    config.apiUrl + "/api/intents/" + intentId,
-    data
+module.exports.delete = (questionId, voicebotId, history, responseCallback) => {
+  axios.delete(
+    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions/" + questionId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
     console.log("ERROR");
     console.log(error.response);
+    errorsHelper.handleAxiosError(history, error);
+  });
+}
+
+module.exports.read = (voicebotId, history, responseCallback) => {
+  axios.get(
+    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions"
+  ).then((response) => {
+    responseCallback(response.data);
+  }).catch((error) => {
+    console.log("ERROR");
+    console.log(error.response);
+    errorsHelper.handleAxiosError(history, error);
+  });
+}
+
+module.exports.update = (questionId, question, voicebotId, history, responseCallback) => {
+  axios.put(
+    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions/" + questionId,
+    {
+      question: question
+    }
+  ).catch((error) => {
+    console.log("ERROR");
+    console.log(error);
     errorsHelper.handleAxiosError(history, error);
   });
 }

@@ -6,9 +6,8 @@ axios.defaults.withCredentials = true;
 
 module.exports.create = (file, fileType, voicebotId, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/voicebot_images",
+    config.apiUrl + "/api/voicebots/" + voicebotId + "/voicebot_images",
     {
-      voicebot_id: voicebotId,
       file: file,
       file_type: fileType
     }
@@ -23,7 +22,7 @@ module.exports.create = (file, fileType, voicebotId, history, responseCallback) 
 
 module.exports.read = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voicebot_images/"+voicebotId
+    config.apiUrl + "/api/voicebots/" + voicebotId + "/voicebot_images"
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {

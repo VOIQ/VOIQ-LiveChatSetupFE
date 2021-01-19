@@ -40,14 +40,15 @@ const IntentUtterances = (props) => {
   }, [props.generatedAt]);
 
   const onQuestionClick = (utteranceId) => {
-    console.log(utteranceId);
     UtteranceResponsesService.readAll(
       utteranceId,
       props.voicebotId,
       history,
       (utterancesResponse) => {
-        console.log(utterancesResponse);
         setSelectedUtterance(utteranceId);
+        utterancesResponse.forEach(answer => 
+          answer.audio_id ? answer.should_show_optional_icon = true : answer.should_show_optional_icon = false
+        );
         setAnswers(JSON.stringify(utterancesResponse));
       }
     );
@@ -59,7 +60,7 @@ const IntentUtterances = (props) => {
         JSON.parse(utterances) && JSON.parse(utterances).map((utterance) => (
             <ListItem
               button
-              key={`${utterance.id}`}
+              key={utterance.id}
               selected={utterance.id === selectedUtterance}
               onClick={() => {onQuestionClick(utterance.id)}}
               generated_at={props.generated_at}

@@ -20,6 +20,8 @@ const EditVoicebot = () => {
   const [voicebotName, setVoicebotName] = useState("");
   const [currentTab, setCurrentTab] = useState("1");
   const [voicebotAuthorizedDomain, setVoicebotAuthorizedDomain] = useState("");
+  const [knownVisitorMessage, setKnownVisitorMessage] = useState("");
+  const [instructions, setInstructions] = useState("");
 
   useEffect(() => {
     VoicebotsService.read(
@@ -29,6 +31,8 @@ const EditVoicebot = () => {
         console.log(response)
         setVoicebotAuthorizedDomain(response.authorized_domain);
         setVoicebotName(response.name);
+        setKnownVisitorMessage(response.known_visitor_message);
+        setInstructions(response.instructions);
       }
     );
   }, [history, id]);
@@ -64,7 +68,14 @@ const EditVoicebot = () => {
             <Tab label="Conversations" value="2" />
           </TabList>
           <TabPanel value="1">
-            <Setup voicebotId={id} voicebotAuthorizedDomain={voicebotAuthorizedDomain}/>
+            <Setup 
+              voicebotId={id} 
+              voicebotAuthorizedDomain={voicebotAuthorizedDomain}
+              setKnownVisitorMessage={setKnownVisitorMessage}
+              knownVisitorMessage={knownVisitorMessage}
+              setInstructions={setInstructions}
+              instructions={instructions}
+            />
           </TabPanel>
           <TabPanel value="2">
             <Conversations voicebotId={id}/>

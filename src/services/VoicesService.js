@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.read = (voiceId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voices/"+voiceId
+    config.apiUrl + "/api/voices/" + voiceId
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
