@@ -1,5 +1,7 @@
 import React from "react";
 
+import {MAX_LEN_INSTRUCTIONS} from "../../../../../../constants";
+
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
@@ -9,7 +11,6 @@ import VoicebotsService from "../../../../../../services/VoicebotsService";
 
 const Instructions = (props) => {
   const history = useHistory();
-  const maxLength = 100;
 
   const onInstructionsBlur = (_event) => {
     VoicebotsService.update(
@@ -37,8 +38,8 @@ const Instructions = (props) => {
           onBlur={onInstructionsBlur}
           value={props.instructions}
           className="customize-text-area"
-          inputProps={{ maxLength: maxLength }}
-          helperText={props.instructions.length + "/" + maxLength}
+          inputProps={{ maxLength: MAX_LEN_INSTRUCTIONS }}
+          helperText={props.instructions.length + "/" + MAX_LEN_INSTRUCTIONS}
         />
       </Grid>
     </Grid>

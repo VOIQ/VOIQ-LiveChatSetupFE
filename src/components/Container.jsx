@@ -9,6 +9,7 @@ import CreateVoicebot from "./Voicebots/CreateVoicebot/CreateVoicebot";
 import Voicebots from "./Voicebots/Voicebots";
 import {CircularProgress, Grid} from "@material-ui/core";
 import EditVoicebot from "./Voicebots/EditVoicebot/EditVoicebot";
+import MyProfile from "./Account/MyProfile";
 
 const PrivateRoute = ({children, ...props}) => {
   const history = useHistory();
@@ -76,6 +77,11 @@ const Container = () => {
       <PrivateRoute exact userRole={userRole} setUserRole={setUserRole} path="/voicebots/edit/:id">
         <App userRole={userRole}>
           <EditVoicebot />
+        </App>
+      </PrivateRoute>
+      <PrivateRoute exact userRole={userRole} setUserRole={setUserRole} path="/myprofile">
+        <App userRole={userRole}>
+          <MyProfile />
         </App>
       </PrivateRoute>
       <Route path="*">

@@ -1,5 +1,7 @@
 import React from "react";
 
+import {MAX_LEN_KNOWN_VISITOR_MESSAGE} from "../../../../../constants";
+
 import './Customize.scss';
 
 import Grid from "@material-ui/core/Grid";
@@ -13,7 +15,6 @@ import VoicebotsService from "../../../../../services/VoicebotsService";
 
 const BubbleMessages = (props) => {
   const history = useHistory();
-  const maxLength = 100;
 
   const onKnownVisitorMessageBlur = (_event) => {
     VoicebotsService.update(
@@ -49,8 +50,8 @@ const BubbleMessages = (props) => {
           onBlur={onKnownVisitorMessageBlur}
           value={props.knownVisitorMessage}
           className="customize-text-area"
-          inputProps={{ maxLength: maxLength }}
-          helperText={props.knownVisitorMessage.length + "/" + maxLength}
+          inputProps={{ maxLength: MAX_LEN_KNOWN_VISITOR_MESSAGE }}
+          helperText={props.knownVisitorMessage.length + "/" + MAX_LEN_KNOWN_VISITOR_MESSAGE}
         />
       </Grid>
     </Grid>

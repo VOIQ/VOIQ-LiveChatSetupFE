@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
+import {MAX_LEN_QUESTION} from "../../../../../../constants";
+
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
@@ -83,7 +85,7 @@ const ExampleQuestions = (props) => {
           numberOfItems={numberOfQuestions}
           setNumberOfItems={setNumberOfQuestions}
           helperText={true}
-          maxLength={60}
+          maxLength={MAX_LEN_QUESTION}
           limit={3}
         />
       </Grid>

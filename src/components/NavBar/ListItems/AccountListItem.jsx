@@ -4,15 +4,17 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ListItem from "@material-ui/core/ListItem";
+import {useHistory} from "react-router-dom";
 
 const AccountListItem = (props) => {
+  const history = useHistory();
   return (
     <ListItem
       button
       className={`list-item ${props.open ? "list-item-open" : "list-item-closed"}`}
-      key="My Account"
+      key="My Profile"
       onClick={() => {
-        console.log("My account");
+        history.push('/myprofile');
       }}
     >
       <ListItemIcon
@@ -22,7 +24,7 @@ const AccountListItem = (props) => {
       </ListItemIcon>
       <ListItemText
         className={`${!props.open ? "item-text-closed" : "item-text-open "}`}
-        primary="My account"
+        primary="My profile"
       />
     </ListItem>
   );
