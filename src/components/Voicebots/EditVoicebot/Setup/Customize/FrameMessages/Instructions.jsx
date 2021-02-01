@@ -1,6 +1,6 @@
 import React from "react";
 
-import {MAX_LEN_INSTRUCTIONS} from "../../../../../../constants";
+import {MAX_LEN_FRAME_INSTRUCTIONS, MAX_ROW_FRAME_INSTRUCTIONS} from "../../../../../../constants";
 
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
@@ -23,7 +23,9 @@ const Instructions = (props) => {
   }
   
   const onInstructionsChange = (event) => {
-    props.setInstructions(event.target.value);
+    if (event.target.value.split(/\r\n|\r|\n/).length < 4) {
+      props.setInstructions(event.target.value);
+    }
   }
 
   return (
@@ -34,12 +36,14 @@ const Instructions = (props) => {
       <Grid item xs={8}>
         <TextField
           id={"instructions"}
+          multiline={true}
+          rowsMax={MAX_ROW_FRAME_INSTRUCTIONS}
           onChange={onInstructionsChange}
           onBlur={onInstructionsBlur}
           value={props.instructions}
           className="customize-text-area"
-          inputProps={{ maxLength: MAX_LEN_INSTRUCTIONS }}
-          helperText={props.instructions.length + "/" + MAX_LEN_INSTRUCTIONS}
+          inputProps={{ maxLength: MAX_LEN_FRAME_INSTRUCTIONS }}
+          helperText={props.instructions.length + "/" + MAX_LEN_FRAME_INSTRUCTIONS + "    " + props.instructions.split(/\r\n|\r|\n/).length + "/" + MAX_ROW_FRAME_INSTRUCTIONS}
         />
       </Grid>
     </Grid>

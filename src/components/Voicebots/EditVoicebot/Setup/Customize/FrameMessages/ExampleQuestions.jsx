@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 
-import {MAX_LEN_QUESTION} from "../../../../../../constants";
+import {MAX_LEN_FRAME_EXAMPLE_QUESTION, MAX_FRAME_EXAMPLE_QUESTIONS} from "../../../../../../constants";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -85,8 +85,8 @@ const ExampleQuestions = (props) => {
           numberOfItems={numberOfQuestions}
           setNumberOfItems={setNumberOfQuestions}
           helperText={true}
-          maxLength={MAX_LEN_QUESTION}
-          limit={3}
+          maxLength={MAX_LEN_FRAME_EXAMPLE_QUESTION}
+          limit={MAX_FRAME_EXAMPLE_QUESTIONS}
         />
       </Grid>
     </Grid>
