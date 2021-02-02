@@ -41,11 +41,10 @@ const SessionDetails = (props) => {
     for (let conversationId in localConversations) {
       let normalizedConversation = ConversationsHelper.normalizeConversation(localConversations[conversationId]);
       let date = new Date(normalizedConversation.created_at);
-
       let answerText = "";
-      if (normalizedConversation.answersData) {
+      if (normalizedConversation.answersData ) {
         normalizedConversation.answersData.forEach((answer, _index) => {
-          answerText += answer.response_text + " - ";
+          answer.response_text ? answerText += answer.response_text + " - " : answerText += answer.greeting_message; 
         });
       }
 
