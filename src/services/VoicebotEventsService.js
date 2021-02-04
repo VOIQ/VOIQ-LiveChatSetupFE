@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.readSessionConversations = (sessionId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voicebot_events/conversations/" + sessionId
+    config.apiUrl + "/api/voicebot_events/session/" + sessionId + "/conversations"
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
