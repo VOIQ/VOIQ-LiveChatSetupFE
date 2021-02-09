@@ -87,6 +87,10 @@ const Setup = (props) => {
             knownVisitorMessage={props.knownVisitorMessage}
             setInstructions={props.setInstructions}
             instructions={props.instructions}
+            setGreetFirstTimeUser={props.setGreetFirstTimeUser}
+            greetFirstTimeUser={props.greetFirstTimeUser}
+            setGreetRecurrentUser={props.setGreetRecurrentUser}
+            greetRecurrentUser={props.greetRecurrentUser}
           />
         </AccordionDetails>
       </Accordion>

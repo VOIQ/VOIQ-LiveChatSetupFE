@@ -47,9 +47,7 @@ module.exports.update = (voicebotId, data, history, responseCallback) => {
   axios.put(
     config.apiUrl + "/api/voicebots/" + voicebotId,
     data
-  ).then((response) => {
-    responseCallback(response.data);
-  }).catch((error) => {
+  ).catch((error) => {
     console.log("ERROR");
     console.log(error.response);
     errorsHelper.handleAxiosError(history, error);

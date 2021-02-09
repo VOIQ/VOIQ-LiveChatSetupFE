@@ -20,9 +20,7 @@ const BubbleMessages = (props) => {
     VoicebotsService.update(
       props.voicebotId,
       { "known_visitor_message": props.knownVisitorMessage },
-      history,
-      (response) => {
-      }
+      history
     );
   }
 

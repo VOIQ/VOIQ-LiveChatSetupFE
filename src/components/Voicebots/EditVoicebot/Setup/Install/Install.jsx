@@ -28,10 +28,7 @@ const Install = (props) => {
       {
         authorized_domain: authorizedDomain
       },
-      history,
-      (response) => {
-        console.log(response);
-      }
+      history
     )
   }
 

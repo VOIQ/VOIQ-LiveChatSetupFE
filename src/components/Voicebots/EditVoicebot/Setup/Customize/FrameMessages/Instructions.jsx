@@ -16,9 +16,7 @@ const Instructions = (props) => {
     VoicebotsService.update(
       props.voicebotId,
       { "instructions": props.instructions },
-      history,
-      (response) => {
-      }
+      history
     );
   }
   

@@ -9,6 +9,7 @@ import ExampleQuestions from "./FrameMessages/ExampleQuestions";
 
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import GreetingMessages from "./GreetingMessages";
 
 const Customize = (props) => {
 
@@ -40,6 +41,13 @@ const Customize = (props) => {
               voicebotId={props.voicebotId}
             />
           </Grid>
+          <GreetingMessages 
+            voicebotId={props.voicebotId}
+            setGreetFirstTimeUser={props.setGreetFirstTimeUser}
+            greetFirstTimeUser={props.greetFirstTimeUser}
+            setGreetRecurrentUser={props.setGreetRecurrentUser}
+            greetRecurrentUser={props.greetRecurrentUser}
+          />
         </Grid>
       </Grid>
     </Grid>

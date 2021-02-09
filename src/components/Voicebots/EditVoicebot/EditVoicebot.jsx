@@ -21,6 +21,8 @@ const EditVoicebot = () => {
   const [currentTab, setCurrentTab] = useState("1");
   const [voicebotAuthorizedDomain, setVoicebotAuthorizedDomain] = useState("");
   const [knownVisitorMessage, setKnownVisitorMessage] = useState("");
+  const [greetFirstTimeUser, setGreetFirstTimeUser] = useState("");
+  const [greetRecurrentUser, setGreetRecurrentUser] = useState("");
   const [instructions, setInstructions] = useState("");
 
   useEffect(() => {
@@ -28,11 +30,12 @@ const EditVoicebot = () => {
       id,
       history,
       (response) => {
-        console.log(response)
         setVoicebotAuthorizedDomain(response.authorized_domain);
         setVoicebotName(response.name);
         setKnownVisitorMessage(response.known_visitor_message);
         setInstructions(response.instructions);
+        setGreetFirstTimeUser(response.greet_first_time_user);
+        setGreetRecurrentUser(response.greet_recurrent_user);
       }
     );
   }, [history, id]);
@@ -41,10 +44,7 @@ const EditVoicebot = () => {
     VoicebotsService.update(
       id,
       { "name": voicebotName },
-      history,
-      (response) => {
-        // TODO: Handle response?
-      }
+      history
     );
   }
 
@@ -75,6 +75,10 @@ const EditVoicebot = () => {
               knownVisitorMessage={knownVisitorMessage}
               setInstructions={setInstructions}
               instructions={instructions}
+              setGreetFirstTimeUser={setGreetFirstTimeUser}
+              greetFirstTimeUser={greetFirstTimeUser}
+              setGreetRecurrentUser={setGreetRecurrentUser}
+              greetRecurrentUser={greetRecurrentUser}
             />
           </TabPanel>
           <TabPanel value="2">
