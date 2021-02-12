@@ -1,4 +1,4 @@
 {
   "apiUrl": "http://voiq-widget-setup-be:3000",
-  "voicebotsUrl": "https://storageqa.voiq.com/live_chat/voicebots"
+  "voicebotsUrl": "https://voiq-widget-dev.s3.amazonaws.com"
 }
