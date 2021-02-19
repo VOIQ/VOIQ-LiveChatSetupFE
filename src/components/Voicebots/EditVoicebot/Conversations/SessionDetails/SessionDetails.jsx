@@ -43,18 +43,34 @@ const SessionDetails = (props) => {
       let date = new Date(normalizedConversation.created_at);
       let answerText = "";
       if (normalizedConversation.answersData) {
-        normalizedConversation.answersData.forEach((answer, _index) => {
-          answer.response_text ? (answerText += answer.response_text + " - ") : (answerText += answer.greeting_message); 
-        });
+        switch (normalizedConversation.code) {
+          case 'stt_google_successful':
+          case 'tts_request_successful':
+            normalizedConversation.answersData.forEach((answer, _index) => {
+              answerText += answer.response_text + " - "; 
+            });
+            answerText = answerText.slice(0, -3); 
+            break;
+          case 'greeting_message':
+              answerText += normalizedConversation.answersData[0].greeting_message; 
+            break;
+          case 'bot_info_message':
+              answerText += normalizedConversation.answersData[0].message; 
+            break;   
+          default:
+            console.log("<SessionDetails> ERROR (conversationsData): Unrecognised conversation code " + normalizedConversation.code);
+            break;
+        }
       }
-
+      const recording = (normalizedConversation.questionRecording &&
+                        <ConversationPlayer
+                          id={normalizedConversation.id}
+                          questionRecording={normalizedConversation.questionRecording}
+                          answersData={normalizedConversation.answersData}
+                        />);
       sessionConv.push(
         {
-          recording: <ConversationPlayer
-            id={normalizedConversation.id}
-            questionRecording={normalizedConversation.questionRecording}
-            answersData={normalizedConversation.answersData}
-          />,
+          recording: recording,
           question: normalizedConversation.question,
           answer: answerText,
           created_at: date.toLocaleString('en-US', { timeZone: 'EST' }).toString()
