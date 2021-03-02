@@ -12,7 +12,7 @@
 .voiq-app-body {
   margin-left: $body-navbar-margin;
   height: 100%;
-  width: calc(100% - $navbar-size-open);
+  width: calc(100% - #{$navbar-size-open});
 }
 
 .voiq-progress {
