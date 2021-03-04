@@ -61,7 +61,7 @@ const BasicInfo = (props) => {
         setErrorCompanyName(false);
         break;
       default:
-        console.log("<BasicInfo> ERROR (onUserInfoBlur): Unrecognised TextField id" + event.target.id);
+        console.log(`<BasicInfo> ERROR (onUserInfoBlur): Unrecognised TextField id ${event.target.id}.`);
     }
     UsersService.update(
       history,
@@ -83,7 +83,7 @@ const BasicInfo = (props) => {
               setErrorCompanyNameText(errorResponse);  
               break;
             default:
-              console.log("<BasicInfo> ERROR (onUserInfoBlur): Unrecognised TextField id" + event.target.id);
+              console.log(`<BasicInfo> ERROR (onUserInfoBlur): Unrecognised TextField id ${event.target.id}.`);
           }
         }
       }
@@ -103,7 +103,7 @@ const BasicInfo = (props) => {
         setCompanyName(value);
         break;
       default:
-        console.log("<BasicInfo> ERROR (onUserInfoChange): Unrecognised TextField id" + event.target.id);
+        console.log(`<BasicInfo> ERROR (onUserInfoChange): Unrecognised TextField id ${event.target.id}.`);
     }
   }
 

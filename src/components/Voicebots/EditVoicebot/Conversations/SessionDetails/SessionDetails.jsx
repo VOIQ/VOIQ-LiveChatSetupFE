@@ -58,7 +58,7 @@ const SessionDetails = (props) => {
               answerText += normalizedConversation.answersData[0].message; 
             break;   
           default:
-            console.log("<SessionDetails> ERROR (conversationsData): Unrecognised conversation code " + normalizedConversation.code);
+            console.log(`<SessionDetails> ERROR (conversationsData): Unrecognised conversation code ${normalizedConversation.code}`);
             break;
         }
       }

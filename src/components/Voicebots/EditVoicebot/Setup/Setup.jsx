@@ -18,7 +18,7 @@ import Alert from '@material-ui/lab/Alert';
 const Setup = (props) => {
   const [generatedAt, setGeneratedAt] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [showActivationAlert, setActivationAlert] = useState(false);
+  const [activationAlertMessage, setActivationAlertMessage] = useState("");
   const history = useHistory();
 
   const onActivate = () => {
@@ -46,7 +46,7 @@ const Setup = (props) => {
           );
         } else if (response.status === 226) {
           console.log("Undergoing process");
-          setActivationAlert(true);
+          setActivationAlertMessage("The activation process is already undergoing.");
         }
       }
     );
@@ -61,6 +61,9 @@ const Setup = (props) => {
           setGeneratedAt(Date.now().toString());
           setButtonDisabled(false);
           console.log("Process finished");
+          if (response.errors > 0) {
+            setActivationAlertMessage(`Activation completed with ${response.errors} errors.`);
+          }
         } else {
           setTimeout(function(){
             updateGenerateProgress();
@@ -123,7 +126,7 @@ const Setup = (props) => {
           Activate
         </Button>
       </Box>
-      { showActivationAlert && (<Alert className="voiq-info-alert" onClose={() => {setActivationAlert(false)}} severity="info">The activation process is already undergoing</Alert>)}
+      {activationAlertMessage && (<Alert className="voiq-info-alert" onClose={() => {setActivationAlertMessage("")}} severity="info">{activationAlertMessage}</Alert>)}
     </div>
   );
 }
