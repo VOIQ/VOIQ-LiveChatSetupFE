@@ -103,18 +103,6 @@ const Setup = (props) => {
           aria-controls="train-content"
           id="train-header"
         >
-          <Typography>Train</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Train voicebotId={props.voicebotId} generatedAt={generatedAt}/>
-        </AccordionDetails>
-      </Accordion>
-      <Accordion>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon/>}
-          aria-controls="train-content"
-          id="train-header"
-        >
           <Typography>Install</Typography>
         </AccordionSummary>
         <AccordionDetails>
