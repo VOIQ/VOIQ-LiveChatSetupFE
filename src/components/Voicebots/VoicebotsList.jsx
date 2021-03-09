@@ -1,7 +1,6 @@
 import React from 'react';
 
 import './Voicebots.scss';
-import VoicebotsService from '../../services/VoicebotsService';
 
 import {useHistory} from "react-router-dom";
 import TableContainer from "@material-ui/core/TableContainer";
@@ -14,28 +13,12 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import EditIcon from '@material-ui/icons/Edit';
 import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from '@material-ui/icons/Delete';
 
 const VoicebotList = (props) => {
   const history = useHistory();
 
   const onEditClick = (voicebotId) => {
     history.push('/voicebots/edit/'+voicebotId);
-  }
-
-  const onDeleteClick = (voicebotId) => {
-    VoicebotsService.delete(
-      voicebotId,
-      history,
-      (response) => {
-        console.log(response);
-        let voicebotsJson = JSON.parse(props.voicebots);
-        let voicebots = voicebotsJson.filter((voicebot) => {
-          return voicebot.id !== voicebotId;
-        });
-        props.setVoicebots(JSON.stringify(voicebots));
-      }
-    )
   }
 
   let voicebots = JSON.parse(props.voicebots);
@@ -50,8 +33,7 @@ const VoicebotList = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
-                <TableCell padding="checkbox"/>
-                <TableCell padding="checkbox"/>
+                <TableCell padding="checkbox" />
               </TableRow>
             </TableHead>
             <TableBody>
@@ -59,18 +41,6 @@ const VoicebotList = (props) => {
                 return (
                   <TableRow key={voicebot.name}>
                     <TableCell>{voicebot.name}</TableCell>
-                    <TableCell padding="checkbox">
-                      <IconButton
-                        aria-label="edit"
-                        onClick={() => {
-                          // Need to do this inline function because the click event
-                          // in this icon button doesn't always have the same target
-                          onDeleteClick(voicebot.id);
-                        }}
-                      >
-                        <DeleteIcon />
-                      </IconButton>
-                    </TableCell>
                     <TableCell padding="checkbox">
                       <IconButton
                         aria-label="edit"
