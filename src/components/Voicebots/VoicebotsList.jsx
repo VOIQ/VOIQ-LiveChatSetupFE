@@ -33,7 +33,7 @@ const VoicebotList = (props) => {
             <TableHead>
               <TableRow>
                 <TableCell>Name</TableCell>
-                <TableCell padding="checkbox"/>
+                <TableCell padding="checkbox" />
               </TableRow>
             </TableHead>
             <TableBody>
