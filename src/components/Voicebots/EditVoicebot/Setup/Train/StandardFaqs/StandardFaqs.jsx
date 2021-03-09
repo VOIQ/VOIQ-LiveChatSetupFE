@@ -8,6 +8,7 @@ import './StandardFaqs.scss';
 
 import Intents from "./Intents";
 import Answers from "./Answers";
+import IntentTypes from "./IntentTypes";
 
 const StandardFaqs = (props) => {
   const [selectedUtterance, setSelectedUtterance] = useState(null);
@@ -16,14 +17,11 @@ const StandardFaqs = (props) => {
 
   return (
     <Grid container direction="column" spacing={2} className="option-container">
-      <Grid item xs={1} className="option-title">
-        Standard FAQs
-      </Grid>
       <Grid item xs={11} className="standard-faq-container-item">
         <Grid container direction="row" className="standard-faq-container">
           <Grid item xs={6} className="standard-faq-questions">
             <Typography>Questions</Typography>
-            <Intents
+            <IntentTypes
               setAnswers={setAnswers}
               answers={answers}
               setIntents={setIntents}

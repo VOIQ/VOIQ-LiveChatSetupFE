@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import Accordion from "@material-ui/core/Accordion";
 import IntentUtterances from "./IntentUtterances";
+import { Typography } from "@material-ui/core";
 
 const Intents = (props) => {
   const history = useHistory();
@@ -33,6 +34,7 @@ const Intents = (props) => {
 
   return (
     <Container>
+      <Typography>{props.intent}</Typography>
       {
         JSON.parse(intents) && JSON.parse(intents).map((intent) => (
             <Accordion key={intent.id} generated_at={props.generated_at}>
