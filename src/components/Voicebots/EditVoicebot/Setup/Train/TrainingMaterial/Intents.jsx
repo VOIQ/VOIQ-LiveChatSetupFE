@@ -50,9 +50,8 @@ const Intents = (props) => {
         setExamples(JSON.stringify(utterancesResponse));
       }
     );
-
-
   }
+
   return (
     <Container>
       <Typography>{props.intent}</Typography>
