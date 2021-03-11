@@ -39,7 +39,16 @@
   padding: 5px;
 }
 
+.examples-header {
+  display: flex;
+}
+
 .answers-container > p,
-.examples-container > p{
-  margin: 10px;
+.examples-header > p{
+  margin: 10px 6px 10px 10px;
+}
+
+.examples-header > .MuiSvgIcon-root{
+  width: 16px;
+  margin-top: 10px;
 }

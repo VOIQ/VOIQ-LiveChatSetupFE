@@ -4,7 +4,9 @@ import ItemTable from "../../../../../Utils/ItemTable"
 import {useHistory} from "react-router-dom";
 
 import IntentExamplesService from "../../../../../../services/IntentExamplesService";
-import { Typography } from '@material-ui/core';
+
+import InfoIcon from '@material-ui/icons/Info';
+import { Tooltip, Typography } from '@material-ui/core';
 
 const Examples = (props) => {
   const history = useHistory();
@@ -66,7 +68,15 @@ const Examples = (props) => {
 
   return (
     <div className="examples-container">
-      <Typography>Examples</Typography>
+      <div className="examples-header">
+        <Typography>Examples</Typography>
+        <Tooltip 
+          placement="bottom-start" 
+          title="You should have at least 10 examples to improve your bot’s understanding"
+        >
+          <InfoIcon color="action" />
+        </Tooltip>
+      </div>
       <div className="examples">
         <ItemTable
           attributeName='example'
