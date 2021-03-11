@@ -1,26 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import CloudDoneIcon from '@material-ui/icons/CloudDone';
-import ItemTable from "../../../../../Utils/ItemTable"
 import {useHistory} from "react-router-dom";
 
-import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
+import './IntentTypes.scss';
+
+import IntentTypesService from "../../../../../../services/IntentTypesService";
 import Intents from './Intents';
-import { Container } from '@material-ui/core';
+import { Card, CardContent, Container, Typography } from '@material-ui/core';
+
 
 const IntentTypes = (props) => {
   const history = useHistory();
-  const intentTypes = ["FAQ", "Path", "General"]
+  const [intentTypes, setIntentTypes] = useState("[]");
 
-  
+  useEffect(() => {
+    IntentTypesService.read(
+      props.voicebotId,
+      history,
+      (response) => {
+        setIntentTypes(JSON.stringify(response));
+      }
+    );
+  }, [history, props.voicebotId, intentTypes]);
 
   return (
     <Container>
       {
-        intentTypes.map((intent) => (
-            <Intents 
-              intent={intent}
-            />
+        JSON.parse(intentTypes) && JSON.parse(intentTypes).map((intentType, index) => (
+          <div className="intent-type" key={index}>
+            <Card>
+              <CardContent>
+                <Typography gutterBottom variant="h6" component="h4">
+                  {intentType.name}
+                </Typography>
+                <div className="intents">
+                  <Intents
+                    setAnswers={props.setAnswers}
+                    answers={props.answers}
+                    setExamples={props.setExamples}
+                    examples={props.examples}
+                    intentTypeId={intentType.id}
+                    setSelectedUtterance={props.setSelectedUtterance}
+                    selectedUtterance={props.selectedUtterance}
+                    voicebotId={props.voicebotId}
+                    generatedAt={props.generatedAt}
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
           )
         )
       }

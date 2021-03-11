@@ -14,10 +14,21 @@ const ItemRow = (props) => {
     setItem(event.target.value);
   }
 
+  const getHelperText = (item) => {
+    if (props.helperText) {
+      return item.length + "/" + props.maxLength;
+    } else if (props.item.error_message) {
+      return props.item.error_message;
+    } else {
+      return null;
+    }
+  }
+
   return (
     <Grid container direction="row">
       <Grid item xs={10}>
         <TextField
+          error={!!props.item.error_message}
           multiline={props.multiline}
           rowsMax={props.rowsMax}
           id={"item-" + props.item.id}
@@ -25,8 +36,8 @@ const ItemRow = (props) => {
           onBlur={props.onItemBlur}
           onChange={onItemChange}
           className="item-text-field"
-          inputProps={ props.maxLength && { maxLength: props.maxLength } }
-          helperText={ props.helperText && item.length + "/" + props.maxLength }
+          inputProps={props.maxLength && { maxLength: props.maxLength }}
+          helperText={getHelperText(item)}
         />
       </Grid>
       { props.optionalIcon && 

@@ -1,0 +1,36 @@
+.intent-type {
+  margin: 10px 0;
+}
+
+.intents {
+  max-height: 100px;
+  overflow-y: scroll;
+}
+
+.intents > .MuiContainer-root{
+  padding: 0;
+}
+
+.intents > .MuiContainer-root > .MuiButtonBase-root{
+  padding: 5px 0;
+}
+
+.intents > .MuiContainer-root > .MuiButtonBase-root > .MuiListItemText-root > span.MuiTypography-displayBlock{
+  font-size: 12px;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}

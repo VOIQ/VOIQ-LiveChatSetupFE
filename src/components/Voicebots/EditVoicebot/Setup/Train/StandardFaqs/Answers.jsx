@@ -5,6 +5,7 @@ import ItemTable from "../../../../../Utils/ItemTable"
 import {useHistory} from "react-router-dom";
 
 import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
+import { Typography } from '@material-ui/core';
 
 const Answers = (props) => {
   const history = useHistory();
@@ -49,7 +50,7 @@ const Answers = (props) => {
       history,
       (response) => {
         let answers = JSON.parse(props.answers).map((answer) => {
-          if (answer.id.toString() === event.target.id) {
+          if (answer.id.toString() === event.target.id.split('-')[1]) {
             answer.response = event.target.value;
             answer.audio_id = null;
             return answer;
@@ -69,18 +70,23 @@ const Answers = (props) => {
   }
 
   return (
-    <ItemTable
-        attributeName='response'
-        voicebotId={props.voicebotId}
-        itemList={props.answers}
-        setList={props.setAnswers}
-        onRemoveItem={removeAnswer}
-        onItemBlur={onAnswerBlur}
-        addItem={addAnswer}
-        multiline={true}
-        rowsMax={4}
-        optionalIcon={cloudIcon}
-      />
+    <div className="answers-container">
+      <Typography>Answers</Typography>
+      <div className="answers">
+        <ItemTable
+          attributeName='response'
+          voicebotId={props.voicebotId}
+          itemList={props.answers}
+          setList={props.setAnswers}
+          onRemoveItem={removeAnswer}
+          onItemBlur={onAnswerBlur}
+          addItem={addAnswer}
+          multiline={true}
+          rowsMax={4}
+          optionalIcon={cloudIcon}
+        />
+      </div>
+  </div>
   );
 }
 
