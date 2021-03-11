@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.create = (data, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/intents",
+    `${config.apiUrl}/api/intents`,
     data
   ).then((response) => {
     responseCallback(response.data);
@@ -17,9 +17,9 @@ module.exports.create = (data, history, responseCallback) => {
   });
 }
 
-module.exports.read = (intentId, history, responseCallback) => {
+module.exports.read = (intentId, voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/intents/" + intentId
+    `${config.apiUrl}/api/voicebots/${voicebotId}/intents/${intentId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -31,7 +31,7 @@ module.exports.read = (intentId, history, responseCallback) => {
 
 module.exports.readAll = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/intents",
+    `${config.apiUrl}/api/intents`,
     {
       params: {
         voicebot_id: voicebotId
@@ -49,7 +49,7 @@ module.exports.readAll = (voicebotId, history, responseCallback) => {
 
 module.exports.update = (intentId, data, history, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/intents/" + intentId,
+    `${config.apiUrl}/api/intents/${intentId}`,
     data
   ).then((response) => {
     responseCallback(response.data);

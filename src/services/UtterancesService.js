@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.create = (intentId, code, name, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/utterances",
+    `${config.apiUrl}/api/utterances`,
     {
       "intent_id": intentId,
       "code": code,
@@ -24,7 +24,7 @@ module.exports.create = (intentId, code, name, history, responseCallback) => {
 
 module.exports.delete = (utteranceId, history, responseCallback) => {
   axios.delete(
-    config.apiUrl + "/api/utterances/" + utteranceId
+    `${config.apiUrl}/api/utterances/${utteranceId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -36,7 +36,7 @@ module.exports.delete = (utteranceId, history, responseCallback) => {
 
 module.exports.read = (utteranceId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/utterances/" + utteranceId
+    `${config.apiUrl}/api/utterances/${utteranceId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -48,7 +48,7 @@ module.exports.read = (utteranceId, history, responseCallback) => {
 
 module.exports.readAll = (intentId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/utterances",
+    `${config.apiUrl}/api/utterances`,
     {
       params: {
         intent_id: intentId
@@ -65,7 +65,7 @@ module.exports.readAll = (intentId, history, responseCallback) => {
 
 module.exports.update = (utteranceId, intentId, code, name, history, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/utterances/" + utteranceId,
+    `${config.apiUrl}/api/utterances/${utteranceId}`,
     {
       intent_id: intentId,
       code: code,

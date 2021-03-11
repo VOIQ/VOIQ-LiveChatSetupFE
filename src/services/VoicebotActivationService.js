@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.generateResponses = (voicebotId, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/voicebot_activation/responses",
+    `${config.apiUrl}/api/voicebot_activation/responses`,
     {
       "voicebot_id": voicebotId
     }
@@ -21,7 +21,7 @@ module.exports.generateResponses = (voicebotId, history, responseCallback) => {
 
 module.exports.generateActions = (voicebotId, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/voicebot_activation/actions",
+    `${config.apiUrl}/api/voicebot_activation/actions`,
     {
       "voicebot_id": voicebotId
     }
@@ -36,7 +36,7 @@ module.exports.generateActions = (voicebotId, history, responseCallback) => {
 
 module.exports.activate = (voicebotId, authorizedDomain, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/voicebot_activation",
+    `${config.apiUrl}/api/voicebot_activation`,
     {
       "voicebot_id": voicebotId,
       "authorized_domain": authorizedDomain
@@ -52,7 +52,7 @@ module.exports.activate = (voicebotId, authorizedDomain, history, responseCallba
 
 module.exports.progress = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voicebot_activation/progress",
+    `${config.apiUrl}/api/voicebot_activation/progress`,
     {
       params: {
         voicebot_id: voicebotId

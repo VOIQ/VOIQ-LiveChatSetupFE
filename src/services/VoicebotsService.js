@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.create = (voicebot_name, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/voicebots",
+    `${config.apiUrl}/api/voicebots`,
     {
       "voicebot_name": voicebot_name
     }
@@ -21,7 +21,7 @@ module.exports.create = (voicebot_name, history, responseCallback) => {
 
 module.exports.read = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voicebots/" + voicebotId
+    `${config.apiUrl}/api/voicebots/${voicebotId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -33,7 +33,7 @@ module.exports.read = (voicebotId, history, responseCallback) => {
 
 module.exports.readAll = (history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voicebots"
+    `${config.apiUrl}/api/voicebots`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -45,7 +45,7 @@ module.exports.readAll = (history, responseCallback) => {
 
 module.exports.update = (voicebotId, data, history, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/voicebots/" + voicebotId,
+    `${config.apiUrl}/api/voicebots/${voicebotId}`,
     data
   ).catch((error) => {
     console.log("ERROR");
@@ -56,7 +56,7 @@ module.exports.update = (voicebotId, data, history, responseCallback) => {
 
 module.exports.delete = (voicebotId, history, responseCallback) => {
   axios.delete(
-    config.apiUrl + "/api/voicebots/" + voicebotId
+    `${config.apiUrl}/api/voicebots/${voicebotId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
