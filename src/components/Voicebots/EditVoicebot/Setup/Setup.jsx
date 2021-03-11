@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 import Customize from "./Customize/Customize";
-import VoicebotResponsesService from '../../../../services/VoicebotTrainingService';
+import VoicebotResponsesService from '../../../../services/VoicebotActivationService';
 import VoicebotTrainingService from '../../../../services/VoicebotTrainingService';
 import Install from "./Install/Install";
 
