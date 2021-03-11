@@ -2,6 +2,7 @@ import React, {useState} from "react";
 
 import Customize from "./Customize/Customize";
 import VoicebotResponsesService from '../../../../services/VoicebotTrainingService';
+import VoicebotTrainingService from '../../../../services/VoicebotTrainingService';
 import Install from "./Install/Install";
 
 import Accordion from "@material-ui/core/Accordion";
@@ -55,7 +56,7 @@ const Setup = (props) => {
 
   const onTrain = () => {
     setTrainButtonDisabled(true)
-    VoicebotResponsesService.generate_model(
+    VoicebotTrainingService.generate_model(
       props.voicebotId,
       history,
       (response) => {
