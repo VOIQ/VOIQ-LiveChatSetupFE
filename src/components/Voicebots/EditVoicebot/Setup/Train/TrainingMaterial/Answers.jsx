@@ -13,8 +13,8 @@ const Answers = (props) => {
 
   const addAnswer = (_event) => {
     UtteranceResponsesService.create(
-      selectedUtterance,
       props.voicebotId,
+      selectedUtterance,
       "",
       history,
       (response) => {
@@ -29,6 +29,7 @@ const Answers = (props) => {
 
   const removeAnswer = (answerId) => {
     UtteranceResponsesService.delete(
+      props.voicebotId,
       answerId,
       history,
       (response) => {
@@ -45,6 +46,7 @@ const Answers = (props) => {
     event.persist();
 
     UtteranceResponsesService.update(
+      props.voicebotId,
       event.target.id.split('-')[1],
       event.target.value,
       history,

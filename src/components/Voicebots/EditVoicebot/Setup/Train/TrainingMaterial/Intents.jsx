@@ -31,8 +31,8 @@ const Intents = (props) => {
 
   const onQuestionClick = (utteranceId) => {
     UtteranceResponsesService.readAll(
-      utteranceId,
       props.voicebotId,
+      utteranceId,
       history,
       (utterancesResponse) => {
         setSelectedUtterance(utteranceId);

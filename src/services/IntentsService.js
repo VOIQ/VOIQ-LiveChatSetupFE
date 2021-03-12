@@ -4,9 +4,9 @@ const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
-module.exports.read = (intentId, voicebotId, history, responseCallback) => {
+module.exports.read = (intentTypeId, voicebotId, history, responseCallback) => {
   axios.get(
-    `${config.apiUrl}/api/voicebots/${voicebotId}/intents/${intentId}`
+    `${config.apiUrl}/api/voicebots/${voicebotId}/intents/intent_types/${intentTypeId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
