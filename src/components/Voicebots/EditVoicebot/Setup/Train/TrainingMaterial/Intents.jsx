@@ -62,7 +62,6 @@ const Intents = (props) => {
             key={intent.id}
             selected={intent.id === selectedUtterance}
             onClick={() => {onQuestionClick(intent.id)}}
-            generated_at={props.generated_at}
           >
             <ListItemText primary={intent.name} />
           </ListItem>

@@ -16,7 +16,6 @@ import {useHistory} from "react-router-dom";
 import Alert from '@material-ui/lab/Alert';
 
 const Setup = (props) => {
-  const [generatedAt, setGeneratedAt] = useState(null);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [activationAlertMessage, setActivationAlertMessage] = useState("");
   const history = useHistory();
@@ -58,7 +57,6 @@ const Setup = (props) => {
       history,
       (response) => {
         if (response.percentage === 100) {
-          setGeneratedAt(Date.now().toString());
           setButtonDisabled(false);
           console.log("Process finished");
           if (response.errors > 0) {
@@ -106,7 +104,7 @@ const Setup = (props) => {
           <Typography>Train</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Train voicebotId={props.voicebotId} generatedAt={generatedAt}/>
+          <Train voicebotId={props.voicebotId} />
         </AccordionDetails>
       </Accordion>
       <Accordion>

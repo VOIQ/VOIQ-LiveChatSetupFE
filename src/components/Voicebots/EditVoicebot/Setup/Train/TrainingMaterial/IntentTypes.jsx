@@ -43,7 +43,6 @@ const IntentTypes = (props) => {
                     setSelectedUtterance={props.setSelectedUtterance}
                     selectedUtterance={props.selectedUtterance}
                     voicebotId={props.voicebotId}
-                    generatedAt={props.generatedAt}
                   />
                 </div>
               </CardContent>

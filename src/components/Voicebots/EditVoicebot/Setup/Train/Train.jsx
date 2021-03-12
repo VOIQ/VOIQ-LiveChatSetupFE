@@ -9,7 +9,7 @@ const Train = (props) => {
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
-        <TrainingMaterial voicebotId={props.voicebotId} generatedAt={props.generatedAt}/>
+        <TrainingMaterial voicebotId={props.voicebotId} />
       </Grid>
     </Grid>
   );

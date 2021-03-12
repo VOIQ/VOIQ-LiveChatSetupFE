@@ -27,7 +27,6 @@ const TrainingMaterial = (props) => {
               setSelectedUtterance={setSelectedUtterance}
               selectedUtterance={selectedUtterance}
               voicebotId={props.voicebotId}
-              generatedAt={props.generatedAt}
             />
           </Grid>
           {selectedUtterance && (
