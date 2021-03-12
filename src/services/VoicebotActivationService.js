@@ -47,7 +47,6 @@ module.exports.progress = (voicebotId, history, responseCallback) => {
   axios.get(
     `${config.apiUrl}/api/voicebots/${voicebotId}/voicebot_activation/progress`
   ).then((response) => {
-    console.log(response.data)
     responseCallback(response.data);
   }).catch((error) => {
     console.log("ERROR");
