@@ -3,6 +3,8 @@ import React from 'react';
 import ItemTable from "../../../../../Utils/ItemTable"
 import {useHistory} from "react-router-dom";
 
+import ItemRowHelper from "../../../../../../helpers/ItemRowHelper"
+
 import IntentExamplesService from "../../../../../../services/IntentExamplesService";
 
 import InfoIcon from '@material-ui/icons/Info';
@@ -43,15 +45,15 @@ const Examples = (props) => {
 
   const onExampleBlur = (event) => {
     event.persist();
-
+    let itemId = ItemRowHelper.getIdOfItem(event.target.id);
     IntentExamplesService.update(
       selectedUtterance,
-      event.target.id.split('-')[1],
+      itemId,
       event.target.value,
       history,
       (response) => {
         let examples = JSON.parse(props.examples).map((example) => {
-          if (example.id.toString() === event.target.id.split('-')[1]) {
+          if (example.id.toString() === itemId) {
             example.example = event.target.value;
             if (response.status === 422) {
               example.error_message = response.data.message;

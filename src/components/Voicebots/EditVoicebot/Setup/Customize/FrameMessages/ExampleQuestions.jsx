@@ -6,6 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {useHistory} from "react-router-dom";
 
+import ItemRowHelper from "../../../../../../helpers/ItemRowHelper"
+
 import ExampleQuestionService from "../../../../../../services/ExampleQuestionService";
 
 import ItemTable from '../../../../../Utils/ItemTable';
@@ -60,8 +62,9 @@ const ExampleQuestions = (props) => {
 
   const onQuestionBlur = (event) => {
     event.persist();
+    let itemId = ItemRowHelper.getIdOfItem(event.target.id);
     ExampleQuestionService.update(
-      event.target.id.split('-')[1],
+      itemId,
       event.target.value,
       voicebotId,
       history

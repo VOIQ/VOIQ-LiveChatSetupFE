@@ -16,7 +16,7 @@ const ItemRow = (props) => {
 
   const getHelperText = (item) => {
     if (props.helperText) {
-      return item.length + "/" + props.maxLength;
+      return `${item.length}/${props.maxLength}`;
     } else if (props.item.error_message) {
       return props.item.error_message;
     } else {
@@ -31,7 +31,7 @@ const ItemRow = (props) => {
           error={!!props.item.error_message}
           multiline={props.multiline}
           rowsMax={props.rowsMax}
-          id={"item-" + props.item.id}
+          id={`${props.attributeName}-${props.item.id}`}
           value={item}
           onBlur={props.onItemBlur}
           onChange={onItemChange}

@@ -4,6 +4,8 @@ import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import ItemTable from "../../../../../Utils/ItemTable"
 import {useHistory} from "react-router-dom";
 
+import ItemRowHelper from "../../../../../../helpers/ItemRowHelper"
+
 import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
 import { Typography } from '@material-ui/core';
 
@@ -44,15 +46,15 @@ const Answers = (props) => {
 
   const onAnswerBlur = (event) => {
     event.persist();
-
+    let itemId = ItemRowHelper.getIdOfItem(event.target.id);
     UtteranceResponsesService.update(
       props.voicebotId,
-      event.target.id.split('-')[1],
+      itemId,
       event.target.value,
       history,
       (response) => {
         let answers = JSON.parse(props.answers).map((answer) => {
-          if (answer.id.toString() === event.target.id.split('-')[1]) {
+          if (answer.id.toString() === itemId) {
             answer.response = event.target.value;
             answer.audio_id = null;
             return answer;
