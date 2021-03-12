@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 
 import Customize from "./Customize/Customize";
-import Train from "./Train/Train";
 import VoicebotResponsesService from '../../../../services/VoicebotActivationService';
+import VoicebotTrainingService from '../../../../services/VoicebotTrainingService';
 import Install from "./Install/Install";
 
 import Accordion from "@material-ui/core/Accordion";
@@ -14,9 +14,11 @@ import Button from "@material-ui/core/Button";
 import {Box} from "@material-ui/core";
 import {useHistory} from "react-router-dom";
 import Alert from '@material-ui/lab/Alert';
+import Helpers from "../../../../helpers/Utils";
 
 const Setup = (props) => {
   const [generatedAt, setGeneratedAt] = useState(null);
+  const [trainButtonDisabled, setTrainButtonDisabled] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [activationAlertMessage, setActivationAlertMessage] = useState("");
   const history = useHistory();
@@ -48,6 +50,22 @@ const Setup = (props) => {
           console.log("Undergoing process");
           setActivationAlertMessage("The activation process is already undergoing.");
         }
+      }
+    );
+  }
+
+  const onTrain = () => {
+    setTrainButtonDisabled(true)
+    VoicebotTrainingService.generate_model(
+      props.voicebotId,
+      history,
+      (response) => {
+        const data = response.data;
+
+        setActivationAlertMessage("Training in progress (in a couple of minutes, the bot will be ready)");
+        setTrainButtonDisabled(false);
+
+        Helpers.downloadFile(data.model.url);
       }
     );
   }
@@ -110,6 +128,9 @@ const Setup = (props) => {
         </AccordionDetails>
       </Accordion>
       <Box display="flex" justifyContent="flex-end">
+        <Button disabled={trainButtonDisabled} className="voiq-button-primary train-button" onClick={onTrain}>
+          Train
+        </Button>
         <Button disabled={buttonDisabled} className="voiq-button-primary activate-button" onClick={onActivate}>
           Activate
         </Button>
