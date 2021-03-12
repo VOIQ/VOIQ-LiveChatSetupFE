@@ -4,7 +4,10 @@ import CloudDoneIcon from '@material-ui/icons/CloudDone';
 import ItemTable from "../../../../../Utils/ItemTable"
 import {useHistory} from "react-router-dom";
 
+import ItemRowHelper from "../../../../../../helpers/ItemRowHelper"
+
 import UtteranceResponsesService from "../../../../../../services/UtteranceResponsesService";
+import { Typography } from '@material-ui/core';
 
 const Answers = (props) => {
   const history = useHistory();
@@ -12,8 +15,8 @@ const Answers = (props) => {
 
   const addAnswer = (_event) => {
     UtteranceResponsesService.create(
-      selectedUtterance,
       props.voicebotId,
+      selectedUtterance,
       "",
       history,
       (response) => {
@@ -28,6 +31,7 @@ const Answers = (props) => {
 
   const removeAnswer = (answerId) => {
     UtteranceResponsesService.delete(
+      props.voicebotId,
       answerId,
       history,
       (response) => {
@@ -42,14 +46,15 @@ const Answers = (props) => {
 
   const onAnswerBlur = (event) => {
     event.persist();
-
+    let itemId = ItemRowHelper.getIdOfItem(event.target.id);
     UtteranceResponsesService.update(
-      event.target.id.split('-')[1],
+      props.voicebotId,
+      itemId,
       event.target.value,
       history,
       (response) => {
         let answers = JSON.parse(props.answers).map((answer) => {
-          if (answer.id.toString() === event.target.id) {
+          if (answer.id.toString() === itemId) {
             answer.response = event.target.value;
             answer.audio_id = null;
             return answer;
@@ -69,18 +74,23 @@ const Answers = (props) => {
   }
 
   return (
-    <ItemTable
-        attributeName='response'
-        voicebotId={props.voicebotId}
-        itemList={props.answers}
-        setList={props.setAnswers}
-        onRemoveItem={removeAnswer}
-        onItemBlur={onAnswerBlur}
-        addItem={addAnswer}
-        multiline={true}
-        rowsMax={4}
-        optionalIcon={cloudIcon}
-      />
+    <div className="answers-container">
+      <Typography>Answers</Typography>
+      <div className="answers">
+        <ItemTable
+          attributeName='response'
+          voicebotId={props.voicebotId}
+          itemList={props.answers}
+          setList={props.setAnswers}
+          onRemoveItem={removeAnswer}
+          onItemBlur={onAnswerBlur}
+          addItem={addAnswer}
+          multiline={true}
+          rowsMax={4}
+          optionalIcon={cloudIcon}
+        />
+      </div>
+  </div>
   );
 }
 

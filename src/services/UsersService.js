@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.read = (history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/users"
+    `${config.apiUrl}/api/users`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -18,7 +18,7 @@ module.exports.read = (history, responseCallback) => {
 
 module.exports.update = (history, data, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/users",
+    `${config.apiUrl}/api/users`,
     data
   ).then((response) => {
     responseCallback(response.data);

@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.authenticate = (history, email, password, responseCallback) => {
   axios.post(
-  config.apiUrl + "/api/authenticate",
+  `${config.apiUrl}/api/authenticate`,
   {
     email: email,
     password: password
@@ -19,7 +19,7 @@ module.exports.authenticate = (history, email, password, responseCallback) => {
 
 module.exports.authenticatedPing = (history, responseCallback) => {
   axios.get(
-  config.apiUrl + "/api/authenticate/ping"
+  `${config.apiUrl}/api/authenticate/ping`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -29,7 +29,7 @@ module.exports.authenticatedPing = (history, responseCallback) => {
 
 module.exports.logout = (history) => {
   axios.post(
-    config.apiUrl + "/api/authenticate/logout"
+    `${config.apiUrl}/api/authenticate/logout`
   ).then((response) => {
     history.push('/login');
   }).catch((error) => {

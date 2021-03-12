@@ -6,7 +6,7 @@ axios.defaults.withCredentials = true;
 
 module.exports.create = (voicebotId, question, history, responseCallback) => {
   axios.post(
-    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions",
+    `${config.apiUrl}/api/voicebots/${voicebotId}/example_questions`,
     {
       "question": question
     }
@@ -22,7 +22,7 @@ module.exports.create = (voicebotId, question, history, responseCallback) => {
 
 module.exports.delete = (questionId, voicebotId, history, responseCallback) => {
   axios.delete(
-    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions/" + questionId
+    `${config.apiUrl}/api/voicebots/${voicebotId}/example_questions/${questionId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -34,7 +34,7 @@ module.exports.delete = (questionId, voicebotId, history, responseCallback) => {
 
 module.exports.read = (voicebotId, history, responseCallback) => {
   axios.get(
-    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions"
+    `${config.apiUrl}/api/voicebots/${voicebotId}/example_questions`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -46,7 +46,7 @@ module.exports.read = (voicebotId, history, responseCallback) => {
 
 module.exports.update = (questionId, question, voicebotId, history, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/voicebots/" + voicebotId + "/example_questions/" + questionId,
+    `${config.apiUrl}/api/voicebots/${voicebotId}/example_questions/${questionId}`,
     {
       question: question
     }

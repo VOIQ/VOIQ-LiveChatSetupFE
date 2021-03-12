@@ -1,0 +1,54 @@
+.training-material-container-item {
+  width: 100%;
+  max-width: 100% !important;
+}
+
+.training-material-container {
+  width: 100%;
+  max-width: 100% !important;
+  padding-right: 30px;
+}
+
+.training-material-intents {
+  padding-right: 15px;
+}
+
+.training-material-answers {
+  padding-right: 15px;
+}
+
+.add-answer {
+  text-align: center !important;
+  justify-content: center !important;
+  height: 25px !important;
+}
+
+.delete-answer {
+  padding: 0 !important;
+}
+
+.MuiInput-underline:before {
+  border: 0 !important;
+}
+
+.examples,
+.answers{
+  height: 230px;
+  overflow-y: scroll;
+  margin: 0 5px;
+  padding: 5px;
+}
+
+.examples-header {
+  display: flex;
+}
+
+.answers-container > p,
+.examples-header > p{
+  margin: 10px 6px 10px 10px;
+}
+
+.examples-header > .MuiSvgIcon-root{
+  width: 16px;
+  margin-top: 10px;
+}

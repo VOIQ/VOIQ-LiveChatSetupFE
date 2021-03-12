@@ -1,13 +1,15 @@
 import React from "react";
 
 import Grid from "@material-ui/core/Grid";
-import StandardFaqs from "./StandardFaqs/StandardFaqs";
+
+import './Train.scss';
+import TrainingMaterial from "./TrainingMaterial/TrainingMaterial";
 
 const Train = (props) => {
   return (
     <Grid container direction="column">
       <Grid item xs={12}>
-        <StandardFaqs voicebotId={props.voicebotId} generatedAt={props.generatedAt}/>
+        <TrainingMaterial voicebotId={props.voicebotId} />
       </Grid>
     </Grid>
   );

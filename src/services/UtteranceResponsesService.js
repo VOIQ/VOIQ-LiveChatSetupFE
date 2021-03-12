@@ -7,10 +7,9 @@ axios.defaults.withCredentials = true;
 module.exports.create = (utteranceId, voicebotId, responseText, history, responseCallback) => {
   if(utteranceId) {
     axios.post(
-      config.apiUrl + "/api/utterance_responses",
+      `${config.apiUrl}/api/voicebots/${voicebotId}/utterance_responses`,
       {
         "utterance_id": utteranceId,
-        "voicebot_id": voicebotId,
         "response": responseText
       }
     ).then((response) => {
@@ -24,9 +23,9 @@ module.exports.create = (utteranceId, voicebotId, responseText, history, respons
   }
 }
 
-module.exports.delete = (intentResponseId, history, responseCallback) => {
+module.exports.delete = (voicebotId, intentResponseId, history, responseCallback) => {
   axios.delete(
-    config.apiUrl + "/api/utterance_responses/" + intentResponseId
+    `${config.apiUrl}/api/voicebots/${voicebotId}/utterance_responses/${intentResponseId}`
   ).then((response) => {
     responseCallback(response.data);
   }).catch((error) => {
@@ -36,26 +35,13 @@ module.exports.delete = (intentResponseId, history, responseCallback) => {
   });
 }
 
-module.exports.read = (intentResponseId, history, responseCallback) => {
-  axios.get(
-    config.apiUrl + "/api/utterance_responses/" + intentResponseId
-  ).then((response) => {
-    responseCallback(response.data);
-  }).catch((error) => {
-    console.log("ERROR");
-    console.log(error.response);
-    errorsHelper.handleAxiosError(history, error);
-  });
-}
-
-module.exports.readAll = (utteranceId, voicebotId, history, responseCallback) => {
+module.exports.readAll = (voicebotId, utteranceId, history, responseCallback) => {
   if(utteranceId) {
     axios.get(
-      config.apiUrl + "/api/utterance_responses",
+      `${config.apiUrl}/api/voicebots/${voicebotId}/utterance_responses`,
       {
         params: {
-          utterance_id: utteranceId,
-          voicebot_id: voicebotId
+          utterance_id: utteranceId
         }
       }
     ).then((response) => {
@@ -68,9 +54,9 @@ module.exports.readAll = (utteranceId, voicebotId, history, responseCallback) =>
   }
 }
 
-module.exports.update = (intentResponseId, answer, history, responseCallback) => {
+module.exports.update = (voicebotId, intentResponseId, answer, history, responseCallback) => {
   axios.put(
-    config.apiUrl + "/api/utterance_responses/" + intentResponseId,
+    `${config.apiUrl}/api/voicebots/${voicebotId}/utterance_responses/${intentResponseId}`,
     {
       response: answer
     }

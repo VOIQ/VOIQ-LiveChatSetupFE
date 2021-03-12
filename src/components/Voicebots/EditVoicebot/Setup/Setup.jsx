@@ -17,7 +17,6 @@ import Alert from '@material-ui/lab/Alert';
 import Helpers from "../../../../helpers/Utils";
 
 const Setup = (props) => {
-  const [generatedAt, setGeneratedAt] = useState(null);
   const [trainButtonDisabled, setTrainButtonDisabled] = useState(false);
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [activationAlertMessage, setActivationAlertMessage] = useState("");
@@ -76,7 +75,6 @@ const Setup = (props) => {
       history,
       (response) => {
         if (response.percentage === 100) {
-          setGeneratedAt(Date.now().toString());
           setButtonDisabled(false);
           console.log("Process finished");
           if (response.errors > 0) {
@@ -113,6 +111,18 @@ const Setup = (props) => {
             setGreetRecurrentUser={props.setGreetRecurrentUser}
             greetRecurrentUser={props.greetRecurrentUser}
           />
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon/>}
+          aria-controls="train-content"
+          id="train-header"
+        >
+          <Typography>Train</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Train voicebotId={props.voicebotId} />
         </AccordionDetails>
       </Accordion>
       <Accordion>
