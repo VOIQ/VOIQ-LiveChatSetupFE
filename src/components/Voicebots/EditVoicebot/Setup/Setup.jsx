@@ -4,6 +4,7 @@ import Customize from "./Customize/Customize";
 import VoicebotResponsesService from '../../../../services/VoicebotActivationService';
 import VoicebotTrainingService from '../../../../services/VoicebotTrainingService';
 import Install from "./Install/Install";
+import Train from "./Train/Train"
 
 import Accordion from "@material-ui/core/Accordion";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
