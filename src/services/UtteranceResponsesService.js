@@ -36,18 +36,6 @@ module.exports.delete = (intentResponseId, history, responseCallback) => {
   });
 }
 
-module.exports.read = (intentResponseId, history, responseCallback) => {
-  axios.get(
-    `${config.apiUrl}/api/utterance_responses/${intentResponseId}`
-  ).then((response) => {
-    responseCallback(response.data);
-  }).catch((error) => {
-    console.log("ERROR");
-    console.log(error.response);
-    errorsHelper.handleAxiosError(history, error);
-  });
-}
-
 module.exports.readAll = (utteranceId, voicebotId, history, responseCallback) => {
   if(utteranceId) {
     axios.get(

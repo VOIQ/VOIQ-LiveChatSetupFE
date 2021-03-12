@@ -40,11 +40,9 @@ const ItemRow = (props) => {
           helperText={getHelperText(item)}
         />
       </Grid>
-      { props.optionalIcon && 
-        <Grid item xs={1}>
-          { props.item.should_show_optional_icon && React.createElement(props.optionalIcon) }
-        </Grid>
-      }
+      <Grid item xs={1}>
+        { props.optionalIcon && props.item.should_show_optional_icon && React.createElement(props.optionalIcon) }
+      </Grid>
       <Grid item xs={1}>
         <IconButton aria-label="delete" className="delete-item-row" onClick={() => {props.onRemoveItem(props.item.id)}}>
           <DeleteIcon />
