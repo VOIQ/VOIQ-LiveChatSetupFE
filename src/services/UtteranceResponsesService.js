@@ -4,7 +4,7 @@ const config = require('../config/voiq.json');
 
 axios.defaults.withCredentials = true;
 
-module.exports.create = (utteranceId, voicebotId, responseText, history, responseCallback) => {
+module.exports.create = (voicebotId, utteranceId, responseText, history, responseCallback) => {
   if(utteranceId) {
     axios.post(
       `${config.apiUrl}/api/voicebots/${voicebotId}/utterance_responses`,

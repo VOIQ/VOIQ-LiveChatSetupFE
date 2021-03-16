@@ -1,0 +1,38 @@
+.popup-content{
+ border-radius: 10px;
+ border: none;
+}
+
+.modal {
+  font-size: 12px;
+  border-radius: 2px;
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+.modal > .header {
+  font-size: 18px;
+  text-align: left;
+  padding: 5px;
+}
+.modal > .content {
+  padding: 10px 5px;
+}
+.modal > .actions {
+  padding: 10px 5px;
+  margin: auto;
+  text-align: right;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+}
+
+.voiq-popup {
+  width: 100%;
+}

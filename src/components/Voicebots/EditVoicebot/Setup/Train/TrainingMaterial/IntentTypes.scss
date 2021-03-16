@@ -7,16 +7,20 @@
   overflow-y: scroll;
 }
 
-.intents > .MuiContainer-root{
+.intents {
   padding: 0;
 }
 
-.intents > .MuiContainer-root > .MuiButtonBase-root{
+.intents > .MuiButtonBase-root {
   padding: 5px 0;
 }
 
-.intents > .MuiContainer-root > .MuiButtonBase-root > .MuiListItemText-root > span.MuiTypography-displayBlock{
+.intents > .MuiButtonBase-root > .MuiListItemText-root > span.MuiTypography-displayBlock {
   font-size: 12px;
+}
+
+.add-intent-button {
+  min-width: 30px !important;
 }
 
 /* width */

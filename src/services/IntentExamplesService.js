@@ -21,7 +21,7 @@ module.exports.create = (intentId, exampleText, history, responseCallback) => {
     axios.post(
       `${config.apiUrl}/api/intents/${intentId}/intent_examples`,
       {
-        "example": exampleText
+        example: exampleText
       }
     ).then((response) => {
       responseCallback(response.data);

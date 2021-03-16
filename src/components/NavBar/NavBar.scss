@@ -41,3 +41,7 @@
   justify-content: flex-end;
   height: 80px;
 }
+
+.MuiDrawer-paper {
+  z-index: 998 !important;
+}
